@@ -14,8 +14,6 @@ class Registration extends CI_Controller {
 	 * Initialise class and set its properties.
 	 * 
 	 * @access public
-	 *
-	 * @return void
 	 */
 	public function __construct() {
 		
@@ -48,6 +46,8 @@ class Registration extends CI_Controller {
 				// Get churches list.
 				$data['success'] = 'Registration successful!';
 			}
+
+			//print_r($_POST); exit;
 		}
 
 		// Get churches list.
@@ -98,14 +98,30 @@ class Registration extends CI_Controller {
 		$data = array(
 			'church' => (int) $this->input->post( 'church' ),
 			'name' => trim( $this->input->post( 'name' ) ),
-			'gender' => $this->input->post( 'username' ) === 'F' ? 'F' : 'M',
+			'gender' => $this->input->post( 'gender' ) === 'F' ? 'F' : 'M',
 			'age' => (int) $this->input->post( 'age' ),
-			'accommodation' => empty( $this->input->post( 'accommodation' ) ) ? 0 : 1,
-			'hot_water' => empty( $this->input->post( 'hot_water' ) ) ? 0 : 1,
-			'milk' => empty( $this->input->post( 'milk' ) ) ? 0 : 1,
+			'accommodation' => $this->input->post( 'accommodation' ) ? 1 : 0,
+			'hot_water' => $this->input->post( 'hot_water' ) ? 1 : 0,
+			'milk' => $this->input->post( 'milk' ) ? 1 : 0,
 		);
 
+		if ( $this->input->post( 'day1' ) ) {
+
+		}
+
 		return $this->registration_model->register( $data );
+	}
+
+	/**
+	 * Set date values.
+	 *
+	 * @access private
+	 *
+	 * @return mixed
+	 */
+	private function set_dates() {
+
+
 	}
 
 	/**

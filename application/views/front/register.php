@@ -48,7 +48,7 @@
 								<div class="col-xs-6">
 									<div class="form-group has-feedback">
 										<label>Name</label>
-										<input type="text" id="name" class="form-control" placeholder="Full name">
+										<input name="name" id="name" class="form-control" placeholder="Full name">
 										<span class="glyphicon glyphicon-user form-control-feedback"></span>
 									</div>
 								</div>
@@ -57,22 +57,21 @@
 								<div class="col-xs-6">
 									<div class="form-group has-feedback">
 										<label>Age</label>
-										<input type="number" id="age" class="form-control" placeholder="Age">
+										<input type="number" name="age" id="age" min="1" max="120" class="form-control" placeholder="Age">
 										<span class="glyphicons glyphicons-uk-rat-18 form-control-feedback"></span>
 									</div>
 								</div>
 								<div class="col-xs-3">
 									<div class="form-group has-feedback">
 										<label>Gender</label><br/>
-										<input type="radio" name="gender" class="flat-red" checked> Male
-										<input type="radio" name="gender" class="flat-red"> Female
+										<input type="radio" name="gender" value="M" class="flat-red" checked> Male
+										<input type="radio" name="gender" value="F" class="flat-red"> Female
 									</div>
 								</div>
 								<div class="col-xs-3">
 									<div class="form-group has-feedback">
-										<label>Accommodation Required</label><br>
-										<input type="checkbox" id="accommodation" name="accommodation" value="1"
-										       class="flat-red" checked> Yes, required.
+										<label>Accommodation</label><br>
+										<input type="checkbox" id="accommodation" name="accommodation" value="1" class="flat-red" checked> Yes, required.
 									</div>
 								</div>
 							</div>
@@ -90,34 +89,34 @@
 							<div class="row">
 								<div class="col-xs-6">
 									<div class="form-group has-feedback">
-										<label><input type="checkbox" class="flat-red" checked> Day 1</label><br/>
-										<input type="checkbox" class="flat-red" checked> Night
+										<label><input type="checkbox" name="day1" id="day1" value="1" class="flat-red day" checked> Day 1</label><br/>
+										<input type="checkbox" name="day1_3" value="1" class="flat-red day1_children" checked> Night
 									</div>
 								</div>
 								<div class="col-xs-6">
 									<div class="form-group has-feedback">
-										<label><input type="checkbox" class="flat-red"> Day 2</label><br/>
-										<input type="checkbox" class="flat-red" checked> Morning
-										<input type="checkbox" class="flat-red" checked> Afternoon
-										<input type="checkbox" class="flat-red" checked> Night
+										<label><input type="checkbox" name="day2" id="day2" value="1" class="flat-red day"> Day 2</label><br/>
+										<input type="checkbox" name="day2_1" value="1" class="flat-red day2_children" checked> Morning
+										<input type="checkbox" name="day2_2" value="1" class="flat-red day2_children" checked> Afternoon
+										<input type="checkbox" name="day2_3" value="1" class="flat-red day2_children" checked> Night
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-xs-6">
 									<div class="form-group has-feedback">
-										<label><input type="checkbox" class="flat-red"> Day 3</label><br/>
-										<input type="checkbox" class="flat-red" checked> Morning
-										<input type="checkbox" class="flat-red" checked> Afternoon
-										<input type="checkbox" class="flat-red" checked> Night
+										<label><input type="checkbox" name="day3" id="day3" value="1" class="flat-red day"> Day 3</label><br/>
+										<input type="checkbox" name="day3_1" value="1" class="flat-red day3_children" checked> Morning
+										<input type="checkbox" name="day3_2" value="1" class="flat-red day3_children" checked> Afternoon
+										<input type="checkbox" name="day3_3" value="1" class="flat-red day3_children" checked> Night
 									</div>
 								</div>
 								<div class="col-xs-6">
 									<div class="form-group has-feedback">
-										<label><input type="checkbox" class="flat-red"> Day 4</label><br/>
-										<input type="checkbox" class="flat-red" checked> Morning
-										<input type="checkbox" class="flat-red" checked> Afternoon
-										<input type="checkbox" class="flat-red" checked> Night
+										<label><input type="checkbox" name="day4" id="day4" value="1" class="flat-red day"> Day 4</label><br/>
+										<input type="checkbox" name="day4_1" value="1" class="flat-red day4_children" checked> Morning
+										<input type="checkbox" name="day4_2" value="1" class="flat-red day4_children" checked> Afternoon
+										<input type="checkbox" name="day4_3" value="1" class="flat-red day4_children" checked> Night
 									</div>
 								</div>
 							</div>
