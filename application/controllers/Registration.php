@@ -39,6 +39,17 @@ class Registration extends CI_Controller {
 	 */
 	public function index() {
 
+		// Load form helper.
+		$this->load->helper( 'form' );
+
+		// If form submitted, save data.
+		if ( ! empty( $this->input->post( 'form_submitted' ) ) ) {
+			if ( $this->register() ) {
+				// Get churches list.
+				$data['success'] = 'Registration successful!';
+			}
+		}
+
 		// Get churches list.
 		$data['churches'] = $this->registration_model->get_churches();
 
@@ -60,41 +71,15 @@ class Registration extends CI_Controller {
 	 */
 	public function register() {
 
-		// Load form helper and validation library
-		$this->load->helper( 'form' );
-
 		// Validate form.
 		if ( $this->validate() ) {
 
 			// Attempt to insert registration data.
-			if ( $this->insert() ) {
+			return $this->insert();
 
-				// Registration was success.
-				$response = array(
-					'success' => true,
-					'message' => alert_html( 'Registration successful!' ),
-				);
-
-			} else {
-
-				// Registration was a failure.
-				$response = array(
-					'success' => false,
-					'errors' => alert_html( 'Registration failed. Try again.' ),
-				);
-			}
-
-		} else {
-
-			// Validation failed.
-			$response = array(
-				'success' => false,
-				'errors' => validation_errors(),
-			);
 		}
 
-		// Echo json back to ajax request.
-		echo json_encode( $response );
+		return false;
 	}
 
 	/**
@@ -135,13 +120,14 @@ class Registration extends CI_Controller {
 	 */
 	private function validate() {
 
+		// Load form validation helper.
 		$this->load->library( 'form_validation' );
 
 		// Set validation rules.
-		$this->form_validation->set_rules( 'church', 'Church', 'trim|required|integer' );
-		$this->form_validation->set_rules( 'name', 'Name', 'trim|required' );
-		$this->form_validation->set_rules( 'age', 'Age', 'trim|required|integer' );
-		$this->form_validation->set_rules( 'gender', 'Gender', 'trim|required|max_length[1]' );
+		$this->form_validation->set_rules( 'church', 'church', 'trim|required|integer' );
+		$this->form_validation->set_rules( 'name', 'name', 'trim|required' );
+		$this->form_validation->set_rules( 'age', 'age', 'trim|required|integer' );
+		$this->form_validation->set_rules( 'gender', 'gender', 'trim|required|max_length[1]' );
 
 		return $this->form_validation->run();
 	}

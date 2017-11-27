@@ -3,9 +3,11 @@
 		<a href="javascript:void(0);"><b>Attendee</b> Registration</a>
 	</div>
 
-	<div class="callout callout-success">
-		<p>Registraton successful!</p>
-	</div>
+	<?php if ( isset( $success ) ) : ?>
+		<div class="callout callout-success">
+			<p><?= $success ?></p>
+		</div>
+	<?php endif; ?>
 
 	<?php if ( validation_errors() ) : ?>
 		<div class="callout callout-danger">
@@ -28,6 +30,7 @@
 					</div>
 					<div id="collapseOne" class="panel-collapse collapse in">
 						<div class="box-body">
+							<input type="hidden" name="form_submitted" value="1">
 							<div class="row">
 								<div class="col-xs-6">
 									<div class="form-group">
