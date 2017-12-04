@@ -1,7 +1,7 @@
 /**
  * Registration form page
  */
-$(function ($) {
+$( function ( $ ) {
     'use strict';
 
     /**
@@ -29,11 +29,32 @@ $(function ($) {
      */
     $(function () {
 
-        $( ".day" ).change( function() {
-            if ( this.checked ) {
-                $( '.' + this.attr( 'id' ) + '_children' ).toggle();
+        // Initialize iCheck.
+        $( 'input' ).iCheck({
+            checkboxClass: 'icheckbox_flat-blue',
+            radioClass: 'iradio_flat-blue',
+        });
+
+        // On day check.
+        $( '.day' ).on( 'ifToggled', function() {
+            // Id of the checked date.
+            var id = $( this ).attr( 'id' ),
+                // class if children timings.
+                children = $( '.' + id + '' );
+
+            // If date was checked, then auto check timings.
+            if ( $( this ).prop( 'checked' ) ) {
+                children.iCheck( 'enable' );
+                children.iCheck( 'check' );
+            } else {
+                children.iCheck( 'uncheck' );
+                children.iCheck( 'disable' );
             }
         });
-    });
 
-})(jQuery);
+        // Shortcut to select all dates and timing.
+        $( '#all_days' ).on( 'ifChecked', function() {
+            $( '.day' ).iCheck( 'check' );
+        });
+    });
+});

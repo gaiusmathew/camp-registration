@@ -34,20 +34,40 @@ class Registration_model extends CI_Model {
 	 * @return bool true on success, false on failure
 	 */
 	public function register( $data ) {
+		
+		$this->db->insert( 'registration', $data );
 
-		// Registration data.
-		$register_data = array(
-			'church' => $data['church'],
-			'name' => trim( $data['name'] ),
-			'gender' => $data['gender'],
-			'age' => intval( $data['age'] ),
-			'accommodation' => 0,
-			'hot_water' => 0,
-			'milk' => 0,
-		);
-		
-		return $this->db->insert( 'registration', $register_data );
-		
+		return $this->db->insert_id();
+	}
+
+	/**
+	 * Insert dates data.
+	 *
+	 * @access public
+	 *
+	 * @param array $data Dates data.
+	 *
+	 * @return bool true on success, false on failure
+	 */
+	public function insert_dates( $data ) {
+
+		$this->db->insert( 'dates', $data );
+
+		return $this->db->insert_id();
+	}
+
+	/**
+	 * Insert timings data.
+	 *
+	 * @access public
+	 *
+	 * @param array $data Timing data.
+	 *
+	 * @return bool true on success, false on failure
+	 */
+	public function insert_timings( $data ) {
+
+		return $this->db->insert_batch( 'timing', $data );
 	}
 
 	/**

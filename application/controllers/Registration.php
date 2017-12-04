@@ -46,8 +46,6 @@ class Registration extends CI_Controller {
 				// Get churches list.
 				$data['success'] = 'Registration successful!';
 			}
-
-			//print_r($_POST); exit;
 		}
 
 		// Get churches list.
@@ -76,7 +74,6 @@ class Registration extends CI_Controller {
 
 			// Attempt to insert registration data.
 			return $this->insert();
-
 		}
 
 		return false;
@@ -105,23 +102,61 @@ class Registration extends CI_Controller {
 			'milk' => $this->input->post( 'milk' ) ? 1 : 0,
 		);
 
-		if ( $this->input->post( 'day1' ) ) {
-
+		// Insert attendee personal data and get attendee id.
+		$attendee_id = $this->registration_model->register( $data );
+		// If attendee added, insert date and time.
+		if ( $attendee_id ) {
+			$this->insert_dates_time( $attendee_id, $this->input->post( 'day' ) );
 		}
-
-		return $this->registration_model->register( $data );
 	}
 
 	/**
-	 * Set date values.
+	 * Set date and time values.
+	 *
+	 * Get date and time data from form and format
+	 * it to match db field.
+	 *
+	 * @param int $attendee_id Attendee ID.
+	 * @param array $dates Dates field value.
 	 *
 	 * @access private
 	 *
 	 * @return mixed
 	 */
-	private function set_dates() {
+	private function insert_dates_time( $attendee_id, $dates ) {
 
+		//echo '<pre>'; print_r($days); exit;
 
+		// Do not continue if date data is empty.
+		if ( empty( $dates ) || ! is_array( $dates ) ) {
+			return false;
+		}
+
+		$date['attendee_id'] = $attendee_id;
+		// Loop through each days.
+		for ( $i = 1; $i <= 4; $i++ ) {
+			// If the attendee is not available on this day.
+			$date[ 'day' . $i ] = isset( $dates[ $i ][ 'available' ] ) ? 1 : 0;
+		}
+
+		// Get date id after inserting date.
+		$date_id = $this->registration_model->insert_dates( $date );
+
+		// If dates added, insert timing too.
+		if ( $date_id ) {
+			$timing = array();
+			for ( $i = 1; $i <= 4; $i++ ) {
+				$timing[] = array(
+					'date_id' => $date_id,
+					'morning' => isset( $dates[ $i ][ 'morning' ] ) ? 1 : 0,
+					'noon' => isset( $dates[ $i ][ 'noon' ] ) ? 1 : 0,
+					'evening' => isset( $dates[ $i ][ 'evening' ] ) ? 1 : 0,
+					'night' => isset( $dates[ $i ][ 'night' ] ) ? 1 : 0,
+				);
+			}
+
+			$this->registration_model->insert_timings( $timing );
+		}
 	}
 
 	/**
@@ -144,7 +179,27 @@ class Registration extends CI_Controller {
 		$this->form_validation->set_rules( 'name', 'name', 'trim|required' );
 		$this->form_validation->set_rules( 'age', 'age', 'trim|required|integer' );
 		$this->form_validation->set_rules( 'gender', 'gender', 'trim|required|max_length[1]' );
+		$this->form_validation->set_rules( 'day', 'day', 'callback_dates_required[day]');
 
 		return $this->form_validation->run();
+	}
+
+	/**
+	 * Custom callback for dates validation.
+	 *
+	 * Set custom message for dates and timing.
+	 *
+	 * @param array $value Dates field value.
+	 *
+	 * @return bool
+	 */
+	public function dates_required( $value ) {
+
+		$this->form_validation->set_message(
+			'dates_required',
+			'Why not attending any sessions? Please select dates and time.'
+		);
+
+		return is_array( $value ) && ! empty( $value );
 	}
 }
