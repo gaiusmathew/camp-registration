@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-$config['base_url'] = 'http://localhost:8888/church/camp-registration';
+$config['base_url'] = 'http://localhost/church/camp-registration';
 
 /*
 |--------------------------------------------------------------------------

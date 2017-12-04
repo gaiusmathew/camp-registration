@@ -19,8 +19,7 @@ class Registration extends CI_Controller {
 		
 		parent::__construct();
 
-		$this->load->library( array( 'session' ) );
-		$this->load->helper( array('url' ) );
+		$this->load->helper( array( 'url' ) );
 		$this->load->model( 'front/registration_model' );
 		
 	}
@@ -179,7 +178,7 @@ class Registration extends CI_Controller {
 		$this->form_validation->set_rules( 'name', 'name', 'trim|required' );
 		$this->form_validation->set_rules( 'age', 'age', 'trim|required|integer' );
 		$this->form_validation->set_rules( 'gender', 'gender', 'trim|required|max_length[1]' );
-		$this->form_validation->set_rules( 'day', 'day', 'callback_dates_required[day]');
+		$this->form_validation->set_rules( 'day', 'day', 'callback_dates_required');
 
 		return $this->form_validation->run();
 	}
@@ -200,6 +199,9 @@ class Registration extends CI_Controller {
 			'Why not attending any sessions? Please select dates and time.'
 		);
 
-		return is_array( $value ) && ! empty( $value );
+		return true;
+		echo '<pre>'; print_r($value); exit;
+
+		return ! empty( $value );
 	}
 }

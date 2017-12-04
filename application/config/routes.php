@@ -52,7 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['register'] = 'registration/index';
 $route['login'] = 'user/login';
 $route['logout'] = 'user/logout';
-$route['admin'] = 'admin/index';
+$route['admin/get-report-data'] = 'admin/get_attendees';
 
 $route['default_controller'] = 'registration';
 $route['404_override'] = '';
