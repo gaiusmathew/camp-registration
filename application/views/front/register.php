@@ -1,4 +1,4 @@
-<div class="register-box">
+<div class="register-box" xmlns="http://www.w3.org/1999/html">
 	<div class="register-logo">
 		<a href="javascript:void(0);"><b>Attendee</b> Registration</a>
 	</div>
@@ -23,9 +23,9 @@
 
 	<div class="register-box-body">
 
-		<p class="login-box-msg">Register an attendee</p>
-
-		<form action="<?= base_url( 'register' ) ?>" method="post">
+		<p class="login-box-msg">Register an attendee ( <a href="<?= base_url( 'logout' ) ?>"><b>Logout</b></a> )</p>
+		
+		<?= form_open( 'registration' ) ?>
 			<div class="box-group" id="accordion">
 				<!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
 				<div class="box box-primary">
@@ -96,37 +96,37 @@
 							</tr>
 							<tr>
 								<td>
-									<label><input type="checkbox" name="day[1][available]" id="day1" value="1" class="day"> Day 1</label>
+									<label><input type="checkbox" name="day[1][available]" id="day1" value="1" class="day <?= $dates[1] ?>" <?= $dates[1] ?>> Day 1</label>
 								</td>
 								<td></td>
 								<td></td>
 								<td></td>
-								<td><input type="checkbox" name="day[1][supper]" value="1" class="day1" disabled></td>
+								<td><input type="checkbox" name="day[1][supper]" value="1" class="day1 <?= $dates[1] ?>" disabled></td>
 							</tr>
 							<tr>
 								<td>
-									<label><input type="checkbox" name="day[2][available]" id="day2" value="1" class="day"> Day 2</label>
+									<label><input type="checkbox" name="day[2][available]" id="day2" value="1" class="day <?= $dates[2] ?>" <?= $dates[2] ?>> Day 2</label>
 								</td>
-								<td><input type="checkbox" name="day[2][breakfast]" value="1" class="day2" disabled></td>
-								<td><input type="checkbox" name="day[2][lunch]" value="1" class="day2" disabled></td>
-								<td><input type="checkbox" name="day[2][tea]" value="1" class="day2" disabled></td>
-								<td><input type="checkbox" name="day[2][supper]" value="1" class="day2" disabled></td>
+								<td><input type="checkbox" name="day[2][breakfast]" value="1" class="day2 <?= $dates[2] ?>" disabled></td>
+								<td><input type="checkbox" name="day[2][lunch]" value="1" class="day2 <?= $dates[2] ?>" disabled></td>
+								<td><input type="checkbox" name="day[2][tea]" value="1" class="day2 <?= $dates[2] ?>" disabled></td>
+								<td><input type="checkbox" name="day[2][supper]" value="1" class="day2 <?= $dates[2] ?>" disabled></td>
 							</tr>
 							<tr>
 								<td>
-									<label><input type="checkbox" name="day[3][available]" id="day3" value="1" class="day"> Day 3</label>
+									<label><input type="checkbox" name="day[3][available]" id="day3" value="1" class="day <?= $dates[3] ?>" <?= $dates[3] ?>> Day 3</label>
 								</td>
-								<td><input type="checkbox" name="day[3][breakfast]" value="1" class="day3" disabled></td>
-								<td><input type="checkbox" name="day[3][lunch]" value="1" class="day3" disabled></td>
-								<td><input type="checkbox" name="day[3][tea]" value="1" class="day3" disabled></td>
-								<td><input type="checkbox" name="day[3][supper]" value="1" class="day3" disabled></td>
+								<td><input type="checkbox" name="day[3][breakfast]" value="1" class="day3 <?= $dates[3] ?>" disabled></td>
+								<td><input type="checkbox" name="day[3][lunch]" value="1" class="day3 <?= $dates[3] ?>" disabled></td>
+								<td><input type="checkbox" name="day[3][tea]" value="1" class="day3 <?= $dates[3] ?>" disabled></td>
+								<td><input type="checkbox" name="day[3][supper]" value="1" class="day3 <?= $dates[3] ?>" disabled></td>
 							</tr>
 							<tr>
 								<td>
-									<label><input type="checkbox" name="day[4][available]" id="day4" value="1" class="day"> Day 4</label>
+									<label><input type="checkbox" name="day[4][available]" id="day4" value="1" class="day <?= $dates[4] ?>" <?= $dates[4] ?>> Day 4</label>
 								</td>
-								<td><input type="checkbox" name="day[4][breakfast]" value="1" class="day4" disabled></td>
-								<td><input type="checkbox" name="day[4][lunch]" value="1" class="day4" disabled></td>
+								<td><input type="checkbox" name="day[4][breakfast]" value="1" class="day4 <?= $dates[4] ?>" disabled></td>
+								<td><input type="checkbox" name="day[4][lunch]" value="1" class="day4 <?= $dates[4] ?>" disabled></td>
 								<td></td>
 								<td></td>
 							</tr>

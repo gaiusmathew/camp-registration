@@ -16,11 +16,14 @@ class Admin extends CI_Controller {
 	 * @access public
 	 */
 	public function __construct() {
-		
+
 		parent::__construct();
 
 		$this->load->library( array( 'session' ) );
-		$this->load->helper( array( 'url' ) );
+		$this->load->helper( array( 'url', 'user' ) );
+
+		// Force login.
+		force_login();
 	}
 
 	/**

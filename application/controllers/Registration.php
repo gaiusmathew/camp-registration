@@ -19,9 +19,12 @@ class Registration extends CI_Controller {
 		
 		parent::__construct();
 
-		$this->load->helper( array( 'url' ) );
+		$this->load->library( array( 'session' ) );
+		$this->load->helper( array( 'url', 'user' ) );
 		$this->load->model( 'front/registration_model' );
-		
+
+		// Force login.
+		force_login();
 	}
 
 	/**
@@ -52,11 +55,39 @@ class Registration extends CI_Controller {
 
 		// Get churches list.
 		$data['churches'] = $this->registration_model->get_churches();
+		$data['dates'] = $this->get_active_dates();
 
 		// Render html.
 		$this->load->view( 'front/common/header' );
 		$this->load->view( 'front/register', $data );
 		$this->load->view( 'front/common/footer' );
+	}
+
+	/**
+	 * Get classess to disable dates
+	 * @return array
+	 */
+	private function get_active_dates() {
+
+		$days_class = array();
+		$today = strtotime( 'today' );;
+
+		$days = array(
+			1 => '04-12-2017',
+			2 => '05-12-2017',
+			3 => '26-12-2017',
+			4 => '27-12-2017',
+		);
+
+		foreach ( $days as $key => $day ) {
+			if( strtotime( $day ) < $today ) {
+				$days_class[ $key ] = 'disabled';
+			} else {
+				$days_class[ $key ] = '';
+			}
+		}
+
+		return $days_class;
 	}
 
 	/**

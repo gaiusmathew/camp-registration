@@ -1,37 +1,41 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<div class="container">
-	<div class="row">
-		<?php if (validation_errors()) : ?>
-			<div class="col-md-12">
-				<div class="alert alert-danger" role="alert">
-					<?= validation_errors() ?>
-				</div>
-			</div>
-		<?php endif; ?>
-		<?php if (isset($error)) : ?>
-			<div class="col-md-12">
-				<div class="alert alert-danger" role="alert">
-					<?= $error ?>
-				</div>
-			</div>
-		<?php endif; ?>
-		<div class="col-md-12">
-			<div class="page-header">
-				<h1>Login</h1>
-			</div>
-			<?= form_open() ?>
-				<div class="form-group">
-					<label for="username">Username</label>
-					<input type="text" class="form-control" id="username" name="username" placeholder="Your username">
-				</div>
-				<div class="form-group">
-					<label for="password">Password</label>
-					<input type="password" class="form-control" id="password" name="password" placeholder="Your password">
-				</div>
-				<div class="form-group">
-					<input type="submit" class="btn btn-default" value="Login">
-				</div>
-			</form>
+<?php
+
+// If accessed directly, Amen.
+defined( 'BASEPATH' ) or exit( 'God bless you!' ); ?>
+
+<div class="login-box login-box-small">
+	<div class="login-logo">
+		<a href="#"><b>Camp</b> Registration</a>
+	</div>
+
+	<?php $error = $this->session->flashdata( 'error' ); ?>
+	<?php if ( isset( $error ) ) : ?>
+		<div class="callout callout-danger">
+			<?= $error ?>
 		</div>
-	</div><!-- .row -->
-</div><!-- .container -->
+	<?php endif; ?>
+
+	<!-- /.login-logo -->
+	<div class="login-box-body">
+		<p class="login-box-msg">Sign in using your credentials</p>
+
+		<?= form_open( 'validate' ) ?>
+			<div class="form-group has-feedback">
+				<input class="form-control" id="username" name="username" placeholder="Your username">
+				<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+			</div>
+			<div class="form-group has-feedback">
+				<input type="password" class="form-control" id="password" name="password" placeholder="Your password">
+				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+			</div>
+			<div class="row">
+				<!-- /.col -->
+				<div class="col-xs-12 float-left">
+					<button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+				</div>
+				<!-- /.col -->
+			</div>
+		</form>
+	</div>
+	<!-- /.login-box-body -->
+</div>

@@ -59,7 +59,7 @@ $( function ( $ ) {
 
         // Shortcut to select all dates and timing.
         $( '#all_days' ).on( 'ifChecked', function() {
-            $( '.day' ).iCheck( 'check' );
+            $( '.day' ).not( '.disabled' ).iCheck( 'check' );
         });
     });
 });
