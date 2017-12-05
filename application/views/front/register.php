@@ -9,6 +9,12 @@
 		</div>
 	<?php endif; ?>
 
+	<?php if ( isset( $error ) ) : ?>
+		<div class="callout callout-danger">
+			<p><?= $error ?></p>
+		</div>
+	<?php endif; ?>
+
 	<?php if ( validation_errors() ) : ?>
 		<div class="callout callout-danger">
 			<?= validation_errors() ?>
@@ -83,10 +89,10 @@
 						<table class="table table-bordered">
 							<tr>
 								<th><label><input type="checkbox" name="all_days" id="all_days" value="1" class="all_days"> All days</label></th>
-								<th>Morning</th>
-								<th>Noon</th>
-								<th>Evening</th>
-								<th>Night</th>
+								<th>Breakfast</th>
+								<th>Lunch</th>
+								<th>Tea</th>
+								<th>Supper</th>
 							</tr>
 							<tr>
 								<td>
@@ -95,32 +101,32 @@
 								<td></td>
 								<td></td>
 								<td></td>
-								<td><input type="checkbox" name="day[1][night]" value="1" class="day1" disabled></td>
+								<td><input type="checkbox" name="day[1][supper]" value="1" class="day1" disabled></td>
 							</tr>
 							<tr>
 								<td>
 									<label><input type="checkbox" name="day[2][available]" id="day2" value="1" class="day"> Day 2</label>
 								</td>
-								<td><input type="checkbox" name="day[2][morning]" value="1" class="day2" disabled></td>
-								<td><input type="checkbox" name="day[2][noon]" value="1" class="day2" disabled></td>
-								<td><input type="checkbox" name="day[2][evening]" value="1" class="day2" disabled></td>
-								<td><input type="checkbox" name="day[1][night]" value="1" class="day2" disabled></td>
+								<td><input type="checkbox" name="day[2][breakfast]" value="1" class="day2" disabled></td>
+								<td><input type="checkbox" name="day[2][lunch]" value="1" class="day2" disabled></td>
+								<td><input type="checkbox" name="day[2][tea]" value="1" class="day2" disabled></td>
+								<td><input type="checkbox" name="day[2][supper]" value="1" class="day2" disabled></td>
 							</tr>
 							<tr>
 								<td>
 									<label><input type="checkbox" name="day[3][available]" id="day3" value="1" class="day"> Day 3</label>
 								</td>
-								<td><input type="checkbox" name="day[3][morning]" value="1" class="day3" disabled></td>
-								<td><input type="checkbox" name="day[3][noon]" value="1" class="day3" disabled></td>
-								<td><input type="checkbox" name="day[3][evening]" value="1" class="day3" disabled></td>
-								<td><input type="checkbox" name="day[1][night]" value="1" class="day3" disabled></td>
+								<td><input type="checkbox" name="day[3][breakfast]" value="1" class="day3" disabled></td>
+								<td><input type="checkbox" name="day[3][lunch]" value="1" class="day3" disabled></td>
+								<td><input type="checkbox" name="day[3][tea]" value="1" class="day3" disabled></td>
+								<td><input type="checkbox" name="day[3][supper]" value="1" class="day3" disabled></td>
 							</tr>
 							<tr>
 								<td>
 									<label><input type="checkbox" name="day[4][available]" id="day4" value="1" class="day"> Day 4</label>
 								</td>
-								<td><input type="checkbox" name="day[4][morning]" value="1" class="day4" disabled></td>
-								<td><input type="checkbox" name="day[4][noon]" value="1" class="day4" disabled></td>
+								<td><input type="checkbox" name="day[4][breakfast]" value="1" class="day4" disabled></td>
+								<td><input type="checkbox" name="day[4][lunch]" value="1" class="day4" disabled></td>
 								<td></td>
 								<td></td>
 							</tr>

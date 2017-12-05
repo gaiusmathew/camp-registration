@@ -42,8 +42,11 @@ class Registration extends CI_Controller {
 		// If form submitted, save data.
 		if ( ! empty( $this->input->post( 'form_submitted' ) ) ) {
 			if ( $this->register() ) {
-				// Get churches list.
+				// Set success message.
 				$data['success'] = 'Registration successful!';
+			} else {
+				// Set error message.
+				$data['error'] = 'Oh nah! Registration failed.';
 			}
 		}
 
@@ -107,6 +110,8 @@ class Registration extends CI_Controller {
 		if ( $attendee_id ) {
 			$this->insert_dates_time( $attendee_id, $this->input->post( 'day' ) );
 		}
+
+		return ( ! empty( $attendee_id ) );
 	}
 
 	/**
@@ -147,10 +152,11 @@ class Registration extends CI_Controller {
 			for ( $i = 1; $i <= 4; $i++ ) {
 				$timing[] = array(
 					'date_id' => $date_id,
-					'morning' => isset( $dates[ $i ][ 'morning' ] ) ? 1 : 0,
-					'noon' => isset( $dates[ $i ][ 'noon' ] ) ? 1 : 0,
-					'evening' => isset( $dates[ $i ][ 'evening' ] ) ? 1 : 0,
-					'night' => isset( $dates[ $i ][ 'night' ] ) ? 1 : 0,
+					'day' => $i,
+					'breakfast' => isset( $dates[ $i ][ 'breakfast' ] ) ? 1 : 0,
+					'lunch' => isset( $dates[ $i ][ 'lunch' ] ) ? 1 : 0,
+					'tea' => isset( $dates[ $i ][ 'tea' ] ) ? 1 : 0,
+					'supper' => isset( $dates[ $i ][ 'supper' ] ) ? 1 : 0,
 				);
 			}
 

@@ -33,48 +33,30 @@ $( function ( $ ) {
         var baseUrl = $( '#base_url' ).val();
 
         // Initialize select2.
-        $( '.select2' ).select2();
+        $( '.select2' ).select2({
+            width: '100%'
+        });
 
         // Data table.
         var oTable = $( '#attendees_table' ).dataTable({
-            'processing' : true,
-            'bJQueryUI' : true,
-            'bProcessing' : true,
-            'sPaginationType' : 'full_numbers',
-            'bServerSide' : true,
-            'bDeferRender': true,
-            'sAjaxSource' : baseUrl + '/admin/get-report-data',
-            'fnServerData': function ( sSource, aoData, fnCallback ) {
-                // Set custom filter data.
-                aoData.push(
-                    { "name" : "name", "value" : $( '#name' ).val() },
-                    { "name" : "church", "value" : $( '#church' ).val() },
-                    { "name" : "gender", "value" : $( '#gender' ).val() },
-                    { "name" : "age_from", "value" : $( '#age_from' ).val() },
-                    { "name" : "age_to", "value" : $( '#age_to' ).val() },
-                    { "name" : "day", "value" : $( '#day' ).val() },
-                    { "name" : "time", "value" : $( '#time' ).val() }
-                );
-
-                $.ajax( {
-                    'dataType' : 'json',
-                    'type' : 'POST',
-                    'url' : sSource,
-                    'data' : aoData,
-                    'success' :fnCallback
-                });
+            'processing': true,
+            'serverSide': true,
+            'ajax': {
+                'url': baseUrl + '/admin/get-report-data',
+                'type': 'POST',
+                'data' : function ( data ) {
+                    data.at_name = $( '#name' ).val();
+                    data.at_church = $( '#church' ).val();
+                    data.at_gender = $( '#gender' ).val();
+                    data.at_age_from = $( '#age_from' ).val();
+                    data.at_age_to = $( '#age_to' ).val();
+                    data.at_day = $( '#day' ).val();
+                    data.at_time = $( '#time' ).val();
+                }
             },
-            columns: [
-                { data: "id", "name": "registration.id" },
-                { data: "name", "name": "registration.name" },
-                { data: "church", "name": "registration.church" },
-                { data: "age", "name": "registration.age" },
-                { data: "gender", "name": "registration.gender" },
-                { data: "accommodation", "name": "registration.accommodation" }
-            ],
             "columnDefs": [{
                 'orderable': false,
-                'targets': [1,2,4,5]
+                'targets': [1,4,5]
             }],
         });
 

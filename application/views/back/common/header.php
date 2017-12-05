@@ -10,8 +10,8 @@
   <link rel="stylesheet" href="<?= base_url( 'assets/components/bootstrap/dist/css/bootstrap.min.css'); ?>">
   <!-- DataTables -->
   <link rel="stylesheet" href="<?= base_url( 'assets/components/datatables.net-bs/css/dataTables.bootstrap.min.css'); ?>">
-    <!-- Select2 -->
-    <link rel="stylesheet" href="<?= base_url( 'assets/plugins/select2/css/select2.min.css' ) ?>">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="<?= base_url( 'assets/plugins/select2/css/select2.min.css' ) ?>">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?= base_url( 'assets/dist/css/AdminLTE.css' ) ?>">
   <!-- AdminLTE Skins. Choose a skin from the css/skins

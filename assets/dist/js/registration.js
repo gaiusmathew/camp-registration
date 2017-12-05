@@ -36,7 +36,9 @@ $( function ( $ ) {
         });
 
         // Initialize select2.
-        $( '.select2' ).select2();
+        $( '.select2' ).select2({
+            width: '100%'
+        });
 
         // On day check.
         $( '.day' ).on( 'ifToggled', function() {

@@ -105,8 +105,8 @@
 										<label>Gender</label>
 										<select class="form-control attendee-filter select2" id="gender">
 											<option value="">Select church</option>
-											<option value="">Male</option>
-											<option value="">Female</option>
+											<option value="M">Male</option>
+											<option value="F">Female</option>
 										</select>
 									</div>
 								</div>
@@ -138,10 +138,10 @@
 											<label>Day</label>
 											<select class="form-control attendee-filter select2" id="day">
 												<option value="">Select day</option>
-												<option value="day1">Day 1</option>
-												<option value="day2">Day 2</option>
-												<option value="day3">Day 3</option>
-												<option value="day4">Day 4</option>
+												<option value="1">Day 1</option>
+												<option value="2">Day 2</option>
+												<option value="3">Day 3</option>
+												<option value="4">Day 4</option>
 											</select>
 										</div>
 									</div>
@@ -150,10 +150,10 @@
 											<label>Time</label>
 											<select class="form-control attendee-filter select2" id="time">
 												<option value="">Select time</option>
-												<option value="morning">Morning</option>
-												<option value="noon">Noon</option>
-												<option value="evening">Evening</option>
-												<option value="night">Night</option>
+												<option value="breakfast">Breakfast</option>
+												<option value="lunch">Lunch</option>
+												<option value="tea">Tea</option>
+												<option value="supper">Supper</option>
 											</select>
 										</div>
 									</div>
