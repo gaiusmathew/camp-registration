@@ -35,6 +35,9 @@ $( function ( $ ) {
             radioClass: 'iradio_flat-blue',
         });
 
+        // Initialize select2.
+        $( '.select2' ).select2();
+
         // On day check.
         $( '.day' ).on( 'ifToggled', function() {
             // Id of the checked date.

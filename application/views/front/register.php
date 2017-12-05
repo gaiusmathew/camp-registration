@@ -32,7 +32,7 @@
 								<div class="col-xs-6">
 									<div class="form-group">
 										<label>Church</label>
-										<select class="form-control" name="church" id="church" required>
+										<select class="form-control select2" name="church" id="church" required>
 											<option value="">Select church</option>
 											<?php if ( ! empty( $churches ) ) : ?>
 												<?php foreach ( $churches as $church ) : ?>

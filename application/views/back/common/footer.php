@@ -26,6 +26,8 @@
 <script src="<?= base_url( 'assets/components/jquery-slimscroll/jquery.slimscroll.min.js'); ?>"></script>
 <!-- FastClick -->
 <script src="<?= base_url( 'assets/components/fastclick/lib/fastclick.js') ;?>"></script>
+<!-- Select2 -->
+<script src="<?= base_url( 'assets/plugins/select2/js/select2.min.js' ) ?>"></script>
 <!-- AdminLTE App -->
 <script src="<?= base_url( 'assets/dist/js/adminlte.min.js'); ?>"></script>
 <!-- Custom purposes -->

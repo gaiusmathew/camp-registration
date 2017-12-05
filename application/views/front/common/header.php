@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="<?= base_url( 'assets/dist/css/AdminLTE.css' ) ?>">
   <!-- iCheck -->
   <link rel="stylesheet" href="<?= base_url( 'assets/plugins/iCheck/flat/blue.css' ) ?>">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="<?= base_url( 'assets/plugins/select2/css/select2.min.css' ) ?>">
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">

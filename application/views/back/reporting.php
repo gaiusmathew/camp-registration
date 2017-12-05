@@ -90,7 +90,7 @@
 								<div class="col-xs-2">
 									<div class="form-group has-feedback">
 										<label>Church</label>
-										<select class="form-control attendee-filter" id="church">
+										<select class="form-control attendee-filter select2" id="church">
 											<option value="">Select church</option>
 											<?php if ( ! empty( $churches ) ) : ?>
 												<?php foreach ( $churches as $church ) : ?>
@@ -103,7 +103,7 @@
 								<div class="col-xs-2">
 									<div class="form-group has-feedback">
 										<label>Gender</label>
-										<select class="form-control attendee-filter" id="gender">
+										<select class="form-control attendee-filter select2" id="gender">
 											<option value="">Select church</option>
 											<option value="">Male</option>
 											<option value="">Female</option>
@@ -114,7 +114,7 @@
 									<div class="form-group has-feedback">
 										<div class="col-xs-6">
 											<label>Age from</label>
-											<select class="form-control attendee-filter" id="age_from">
+											<select class="form-control attendee-filter select2" id="age_from">
 												<option value="">Select age</option>
 												<?php for ( $i = 1; $i <= 120; $i++ ) : ?>
 													<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
@@ -123,7 +123,7 @@
 										</div>
 										<div class="col-xs-6">
 											<label>Age to</label>
-											<select class="form-control attendee-filter" id="age_to">
+											<select class="form-control attendee-filter select2" id="age_to">
 												<option value="">Select age</option>
 												<?php for ( $i = 1; $i <= 120; $i++ ) : ?>
 													<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
@@ -136,7 +136,7 @@
 									<div class="col-xs-6">
 										<div class="form-group has-feedback">
 											<label>Day</label>
-											<select class="form-control attendee-filter" id="day">
+											<select class="form-control attendee-filter select2" id="day">
 												<option value="">Select day</option>
 												<option value="day1">Day 1</option>
 												<option value="day2">Day 2</option>
@@ -148,7 +148,7 @@
 									<div class="col-xs-6">
 										<div class="form-group has-feedback">
 											<label>Time</label>
-											<select class="form-control attendee-filter" id="time">
+											<select class="form-control attendee-filter select2" id="time">
 												<option value="">Select time</option>
 												<option value="morning">Morning</option>
 												<option value="noon">Noon</option>

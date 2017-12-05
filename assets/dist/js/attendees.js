@@ -32,6 +32,9 @@ $( function ( $ ) {
         // Base url.
         var baseUrl = $( '#base_url' ).val();
 
+        // Initialize select2.
+        $( '.select2' ).select2();
+
         // Data table.
         var oTable = $( '#attendees_table' ).dataTable({
             'processing' : true,
