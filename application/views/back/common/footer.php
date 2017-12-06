@@ -20,17 +20,11 @@
 <script src="<?= base_url( 'assets/components/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>
 <!-- DataTables -->
 <script src="<?= base_url( 'assets/components/datatables.net/js/jquery.dataTables.min.js'); ?>"></script>
-<script src="<?= base_url( 'assets/components/datatables.net/js/fnReloadAjax.js'); ?>"></script>
+<script src="<?= base_url( 'assets/components/datatables.net/js/fnReloadAjax.min.js'); ?>"></script>
 <script src="<?= base_url( 'assets/components/datatables.net-bs/js/dataTables.bootstrap.min.js'); ?>"></script>
-<!-- SlimScroll -->
-<script src="<?= base_url( 'assets/components/jquery-slimscroll/jquery.slimscroll.min.js'); ?>"></script>
-<!-- FastClick -->
-<script src="<?= base_url( 'assets/components/fastclick/lib/fastclick.js') ;?>"></script>
 <!-- Select2 -->
 <script src="<?= base_url( 'assets/plugins/select2/js/select2.min.js' ) ?>"></script>
-<!-- AdminLTE App -->
-<script src="<?= base_url( 'assets/dist/js/adminlte.min.js'); ?>"></script>
 <!-- Custom purposes -->
-<script src="<?= base_url( 'assets/dist/js/attendees.js'); ?>"></script>
+<script src="<?= base_url( 'assets/dist/js/admin/attendees.min.js'); ?>"></script>
 </body>
 </html>

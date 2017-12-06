@@ -6,6 +6,6 @@
 <script src="<?= base_url( 'assets/plugins/iCheck/icheck.min.js' ) ?>"></script>
 <!-- Select2 -->
 <script src="<?= base_url( 'assets/plugins/select2/js/select2.min.js' ) ?>"></script>
-<script src="<?= base_url( 'assets/dist/js/registration.js' ) ?>"></script>
+<script src="<?= base_url( 'assets/dist/js/front/registration.min.js' ) ?>"></script>
 </body>
 </html>

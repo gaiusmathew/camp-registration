@@ -42,17 +42,6 @@ class Registration extends CI_Controller {
 		// Load form helper.
 		$this->load->helper( 'form' );
 
-		// If form submitted, save data.
-		if ( ! empty( $this->input->post( 'form_submitted' ) ) ) {
-			if ( $this->register() ) {
-				// Set success message.
-				$data['success'] = 'Registration successful!';
-			} else {
-				// Set error message.
-				$data['error'] = 'Oh nah! Registration failed.';
-			}
-		}
-
 		// Get churches list.
 		$data['churches'] = $this->registration_model->get_churches();
 		$data['dates'] = $this->get_active_dates();
@@ -64,22 +53,33 @@ class Registration extends CI_Controller {
 	}
 
 	/**
-	 * Get classess to disable dates
+	 * Get classess to disable dates.
+	 *
+	 * NOTE: This needs to be changed according to camp
+	 * dates change.
+	 *
+	 * @access private
+	 *
 	 * @return array
 	 */
 	private function get_active_dates() {
 
 		$days_class = array();
+
+		// Today time.
 		$today = strtotime( 'today' );;
 
+		// Current camp dates.
 		$days = array(
-			1 => '04-12-2017',
-			2 => '05-12-2017',
+			1 => '24-12-2017',
+			2 => '25-12-2017',
 			3 => '26-12-2017',
 			4 => '27-12-2017',
 		);
 
+		// Loop through each days.
 		foreach ( $days as $key => $day ) {
+			// If current date is greater than the date.
 			if( strtotime( $day ) < $today ) {
 				$days_class[ $key ] = 'disabled';
 			} else {
@@ -95,6 +95,7 @@ class Registration extends CI_Controller {
 	 *
 	 * If validation passed, insert registration data
 	 * to database afer proper formatting.
+	 * Redirect back to registration page.
 	 *
 	 * @access private
 	 *
@@ -106,10 +107,17 @@ class Registration extends CI_Controller {
 		if ( $this->validate() ) {
 
 			// Attempt to insert registration data.
-			return $this->insert();
+			if ( $this->insert() ) {
+				$this->session->set_flashdata( 'success', 'Registration successful!' );
+			} else {
+				$this->session->set_flashdata( 'error', 'Oh nah! Registration failed.' );
+			}
+		} else {
+			// Validation errors.
+			$this->session->set_flashdata( 'error', validation_errors() );
 		}
 
-		return false;
+		redirect( 'registration' );
 	}
 
 	/**
@@ -135,6 +143,8 @@ class Registration extends CI_Controller {
 			'milk' => $this->input->post( 'milk' ) ? 1 : 0,
 		);
 
+		return true;
+
 		// Insert attendee personal data and get attendee id.
 		$attendee_id = $this->registration_model->register( $data );
 		// If attendee added, insert date and time.
@@ -159,8 +169,6 @@ class Registration extends CI_Controller {
 	 * @return mixed
 	 */
 	private function insert_dates_time( $attendee_id, $dates ) {
-
-		//echo '<pre>'; print_r($days); exit;
 
 		// Do not continue if date data is empty.
 		if ( empty( $dates ) || ! is_array( $dates ) ) {
@@ -215,7 +223,7 @@ class Registration extends CI_Controller {
 		$this->form_validation->set_rules( 'name', 'name', 'trim|required' );
 		$this->form_validation->set_rules( 'age', 'age', 'trim|required|integer' );
 		$this->form_validation->set_rules( 'gender', 'gender', 'trim|required|max_length[1]' );
-		$this->form_validation->set_rules( 'day', 'day', 'callback_dates_required');
+		$this->form_validation->set_rules( 'day[]', 'day', 'callback_dates_required');
 
 		return $this->form_validation->run();
 	}
@@ -235,9 +243,6 @@ class Registration extends CI_Controller {
 			'dates_required',
 			'Why not attending any sessions? Please select dates and time.'
 		);
-
-		return true;
-		echo '<pre>'; print_r($value); exit;
 
 		return ! empty( $value );
 	}

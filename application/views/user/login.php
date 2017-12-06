@@ -21,11 +21,11 @@ defined( 'BASEPATH' ) or exit( 'God bless you!' ); ?>
 
 		<?= form_open( 'validate' ) ?>
 			<div class="form-group has-feedback">
-				<input class="form-control" id="username" name="username" placeholder="Your username">
+				<input class="form-control" id="username" name="username" placeholder="Your username" required>
 				<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 			</div>
 			<div class="form-group has-feedback">
-				<input type="password" class="form-control" id="password" name="password" placeholder="Your password">
+				<input type="password" class="form-control" id="password" name="password" placeholder="Your password" required>
 				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 			</div>
 			<div class="row">

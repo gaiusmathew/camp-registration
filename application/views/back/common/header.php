@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Data Tables</title>
+  <title>Camp Registration | Admin</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -13,10 +13,10 @@
   <!-- Select2 -->
   <link rel="stylesheet" href="<?= base_url( 'assets/plugins/select2/css/select2.min.css' ) ?>">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?= base_url( 'assets/dist/css/AdminLTE.css' ) ?>">
+  <link rel="stylesheet" href="<?= base_url( 'assets/dist/css/AdminLTE.min.css' ) ?>">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
 	   folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="<?= base_url( 'assets/dist/css/skins/_all-skins.min.css'); ?>">
+  <link rel="stylesheet" href="<?= base_url( 'assets/dist/css/skins/skin-blue.min.css'); ?>">
 
   <!-- Google Font -->
   <link rel="stylesheet"

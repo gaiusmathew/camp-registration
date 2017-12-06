@@ -40,6 +40,9 @@ $( function ( $ ) {
             width: '100%'
         });
 
+        // Hide success/error messages after 2 seconds.
+        $( '.callout' ).delay( 2000 ).fadeOut( 400 )
+
         // On day check.
         $( '.day' ).on( 'ifToggled', function() {
             // Id of the checked date.

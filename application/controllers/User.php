@@ -35,7 +35,7 @@ class User extends CI_Controller {
 	public function login() {
 
 		$this->load->view( 'user/common/header' );
-		$this->load->view( 'user/login/login' );
+		$this->load->view( 'user/login' );
 		$this->load->view( 'user/common/footer' );
 	}
 
@@ -54,7 +54,7 @@ class User extends CI_Controller {
 
 		// Load required libraries.
 		$this->load->library( 'form_validation' );
-		$this->load->model( 'user_model' );
+		$this->load->model( 'common/user_model' );
 
 		// Set form validation rules.
 		$this->form_validation->set_rules( 'username', 'username', 'required' );

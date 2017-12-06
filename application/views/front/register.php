@@ -3,29 +3,23 @@
 		<a href="javascript:void(0);"><b>Attendee</b> Registration</a>
 	</div>
 
-	<?php if ( isset( $success ) ) : ?>
-		<div class="callout callout-success">
-			<p><?= $success ?></p>
-		</div>
-	<?php endif; ?>
-
+	<?php $error = $this->session->flashdata( 'error' ); ?>
+	<?php $success = $this->session->flashdata( 'success' ); ?>
 	<?php if ( isset( $error ) ) : ?>
 		<div class="callout callout-danger">
-			<p><?= $error ?></p>
+			<?= $error ?>
 		</div>
-	<?php endif; ?>
-
-	<?php if ( validation_errors() ) : ?>
-		<div class="callout callout-danger">
-			<?= validation_errors() ?>
+	<?php elseif ( isset( $success ) ) : ?>
+		<div class="callout callout-success">
+			<?= $success ?>
 		</div>
 	<?php endif; ?>
 
 	<div class="register-box-body">
 
 		<p class="login-box-msg">Register an attendee ( <a href="<?= base_url( 'logout' ) ?>"><b>Logout</b></a> )</p>
-		
-		<?= form_open( 'registration' ) ?>
+
+		<?= form_open( 'registration/register' ) ?>
 			<div class="box-group" id="accordion">
 				<!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
 				<div class="box box-primary">
@@ -33,7 +27,6 @@
 						<h3 class="box-title">Attendee Details</h3>
 					</div>
 						<div class="box-body">
-							<input type="hidden" name="form_submitted" value="1">
 							<div class="row">
 								<div class="col-xs-6">
 									<div class="form-group">
