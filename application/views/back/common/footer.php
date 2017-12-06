@@ -22,9 +22,11 @@
 <script src="<?= base_url( 'assets/components/datatables.net/js/jquery.dataTables.min.js'); ?>"></script>
 <script src="<?= base_url( 'assets/components/datatables.net/js/fnReloadAjax.min.js'); ?>"></script>
 <script src="<?= base_url( 'assets/components/datatables.net-bs/js/dataTables.bootstrap.min.js'); ?>"></script>
+<!--<script src="<?php // base_url( 'assets/components/datatables-extra/dataTables.buttons.min.js'); ?>"></script>
+<script src="<?php // base_url( 'assets/components/datatables-extra/buttons.print.min.js'); ?>"></script>-->
 <!-- Select2 -->
 <script src="<?= base_url( 'assets/plugins/select2/js/select2.min.js' ) ?>"></script>
 <!-- Custom purposes -->
-<script src="<?= base_url( 'assets/dist/js/admin/attendees.min.js'); ?>"></script>
+<script src="<?= base_url( 'assets/dist/js/admin/attendees.js'); ?>"></script>
 </body>
 </html>

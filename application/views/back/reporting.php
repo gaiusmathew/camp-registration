@@ -55,6 +55,18 @@ defined( 'BASEPATH' ) or exit( 'God bless you!' );
 			</ol>
 		</section>
 
+		<?php $error = $this->session->flashdata( 'error' ); ?>
+		<?php $success = $this->session->flashdata( 'success' ); ?>
+		<?php if ( isset( $error ) ) : ?>
+            <div class="callout callout-danger">
+				<?= $error ?>
+            </div>
+		<?php elseif ( isset( $success ) ) : ?>
+            <div class="callout callout-success">
+				<?= $success ?>
+            </div>
+		<?php endif; ?>
+
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
@@ -166,6 +178,7 @@ defined( 'BASEPATH' ) or exit( 'God bless you!' );
 										<th>Age</th>
 										<th>Gender</th>
 										<th>Accommodation</th>
+                                        <th>Actions</th>
 									</tr>
 								</thead>
 								<tbody></tbody>

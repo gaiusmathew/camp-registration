@@ -95,7 +95,46 @@ class Reporting_model extends CI_Model {
 		$this->datatables->edit_column( 'gender', '$1', 'getGender(gender)' );
 		// Add status span for better visibility.
 		$this->datatables->edit_column( 'accommodation', '$1', 'getAccommodation(accommodation)' );
+		$this->datatables->add_column( 'delete', '$1', 'getDeleteLink(id)' );
 
 		return $this->datatables->generate();
+	}
+
+	/**
+	 * Get day table field name from value.
+	 *
+	 * From day filter value, get proper field value in
+	 * database table.
+	 *
+	 * @param int $value Day number.
+	 *
+	 * @access private
+	 *
+	 * @return bool|string
+	 */
+	private function get_date_field( $value ) {
+
+		// Make sure it is number.
+		$value = (int) $value;
+
+		// Add day string and return the field name.
+		return in_array( $value, array( '1', '2', '3', '4' ) ) ? 'day' . $value : false;
+	}
+
+	/**
+	 * Get timing table field name from value.
+	 *
+	 * Get timing table field name from timing
+	 * field value from filter.
+	 *
+	 * @param string $value Timing value.
+	 *
+	 * @access private
+	 *
+	 * @return bool|string
+	 */
+	private function get_time_field( $value ) {
+
+		return in_array( $value, array( 'breakfast', 'lunch', 'tea', 'supper' ) ) ? $value : false;
 	}
 }

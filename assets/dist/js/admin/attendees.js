@@ -39,8 +39,11 @@ $( function ( $ ) {
 
         // Data table.
         var oTable = $( '#attendees_table' ).dataTable({
+            //'dom': 'Blrtip',
+            //'buttons': ['print'],
             'processing': true,
             'serverSide': true,
+            'searching': false,
             'ajax': {
                 'url': baseUrl + '/admin/get-report-data',
                 'type': 'POST',

@@ -30,3 +30,19 @@ function getAccommodation( $required ) {
 		return '<small class="label bg-red">Not required</small>';
 	}
 }
+
+/**
+ * Get delete link for attendee.
+ *
+ * @param int $id Attendee ID.
+ *
+ * @return string
+ */
+function getDeleteLink( $id ) {
+
+	if ( ! empty( $id ) ) {
+		return '<a href="' . base_url( 'admin/delete/attendee/' . base64_encode( $id ) ) . '"><button type="button" class="btn btn-danger btn-xs">Delete</button></a>';
+	}
+
+	return '';
+}

@@ -72,40 +72,31 @@ class Admin extends CI_Controller {
 	}
 
 	/**
-	 * Get day table field name from value.
+	 * Delete and attendee in emergency.
 	 *
-	 * From day filter value, get proper field value in
-	 * database table.
+	 * @access public
 	 *
-	 * @param int $value Day number.
-	 *
-	 * @access private
-	 *
-	 * @return bool|string
+	 * @return bool
 	 */
-	private function get_date_field( $value ) {
+	public function delete_attendee( $id ) {
 
-		// Make sure it is number.
-		$value = (int) $value;
+		// Get the id from url.
+		$id = $this->uri->segment( 4 );
 
-		// Add day string and return the field name.
-		return in_array( $value, array( '1', '2', '3', '4' ) ) ? 'day' . $value : false;
-	}
+		// Do not continue if valid id is not found.
+		if ( empty( $id ) ) {
+			redirect( 'admin' );
+		}
 
-	/**
-	 * Get timing table field name from value.
-	 *
-	 * Get timing table field name from timing
-	 * field value from filter.
-	 *
-	 * @param string $value Timing value.
-	 *
-	 * @access private
-	 *
-	 * @return bool|string
-	 */
-	private function get_time_field( $value ) {
+		$this->load->model( 'front/registration_model' );
 
-		return in_array( $value, array( 'breakfast', 'lunch', 'tea', 'supper' ) ) ? $value : false;
+		// Attempt to delete attendee.
+		if ( $this->registration_model->delete_attendee( base64_decode( $id ) ) ) {
+			$this->session->set_flashdata( 'success', 'Attendee deleted.' );
+		} else {
+			$this->session->set_flashdata( 'error', 'Oops! Could not delete the attendee.' );
+		}
+
+		redirect( 'admin' );
 	}
 }

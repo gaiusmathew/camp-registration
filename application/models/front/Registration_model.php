@@ -135,4 +135,21 @@ class Registration_model extends CI_Model {
 		return $this->db->get()->result();
 
 	}
+
+	/**
+	 * Delete and attendee in emergency.
+	 *
+	 * @param int $id Attendee ID.
+	 *
+	 * @access public
+	 *
+	 * @return bool
+	 */
+	public function delete_attendee( $id ) {
+
+		$this->db->where( 'id', $id );
+		$this->db->delete( 'registration' );
+
+		return $this->db->affected_rows() > 0;
+	}
 }
