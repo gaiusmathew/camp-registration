@@ -41,7 +41,7 @@ $( function ( $ ) {
         });
 
         // Hide success/error messages after 2 seconds.
-        $( '.callout' ).delay( 2000 ).fadeOut( 400 )
+        $( '.callout' ).delay( 2000 ).fadeOut( 400 );
 
         // On day check.
         $( '.day' ).on( 'ifToggled', function() {

@@ -141,9 +141,8 @@ class Registration extends CI_Controller {
 			'accommodation' => $this->input->post( 'accommodation' ) ? 1 : 0,
 			'hot_water' => $this->input->post( 'hot_water' ) ? 1 : 0,
 			'milk' => $this->input->post( 'milk' ) ? 1 : 0,
+			'inserted_by' => $this->session->userdata( 'user_id' )? $this->session->userdata( 'user_id' ) : null,
 		);
-
-		return true;
 
 		// Insert attendee personal data and get attendee id.
 		$attendee_id = $this->registration_model->register( $data );
@@ -189,6 +188,10 @@ class Registration extends CI_Controller {
 		if ( $date_id ) {
 			$timing = array();
 			for ( $i = 1; $i <= 4; $i++ ) {
+				// No need enter timing if not available.
+				if ( empty( $dates[ $i ][ 'available' ] ) ) {
+					continue;
+				}
 				$timing[] = array(
 					'date_id' => $date_id,
 					'day' => $i,

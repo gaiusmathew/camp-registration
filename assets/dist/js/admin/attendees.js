@@ -37,6 +37,9 @@ $( function ( $ ) {
             width: '100%'
         });
 
+        // Hide success/error messages after 2 seconds.
+        $( '.callout' ).delay( 2000 ).fadeOut( 400 );
+
         // Data table.
         var oTable = $( '#attendees_table' ).dataTable({
             //'dom': 'Blrtip',
@@ -66,6 +69,11 @@ $( function ( $ ) {
         // Refresh attendee list on filter.
         $( '.attendee-filter' ).on( 'change', function () {
             oTable.fnReloadAjax();
+        });
+
+        // Ask for confirmation before delete.
+        $( '#attendees_table' ).on( 'click', '.delete' ,function() {
+            return confirm( 'Are you sure? This can\'t be undone.' );
         });
     });
 });
