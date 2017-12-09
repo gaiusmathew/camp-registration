@@ -103,6 +103,7 @@ class Registration extends CI_Controller {
 	 */
 	public function register() {
 
+		//echo '<pre>'; print_r($_POST); exit;
 		// Validate form.
 		if ( $this->validate() ) {
 
@@ -118,6 +119,92 @@ class Registration extends CI_Controller {
 		}
 
 		redirect( 'registration' );
+	}
+
+	/**
+	 * Insert dummy data to database for testing.
+	 *
+	 * @param int $count Dummy user count.
+	 *
+	 * @return void
+	 */
+	public function insert_dummy( $count = 10 ) {
+
+		$names = array( 'Sijo', 'Joel', 'Biju', 'Sabu', 'Shintu', 'Gaius', 'Abin', 'Prem', 'Vivek', 'Adyn', 'Stephen' );
+		$gender = array( 'M', 'F' );
+		for ( $i = 0; $i < $count; $i++ ) {
+			$data = array(
+				'church'        => rand( 1, 14 ),
+				'name'          => $names[ rand( 0, count( $names ) - 1 ) ],
+				'age'           => rand( 1, 120 ),
+				'gender'        => $gender[ rand( 0, 1 ) ],
+				'accommodation' => rand( 0, 1 ),
+				'all_days'      => rand( 0, 1 ),
+				'day'           => array(
+					1 => array(
+						'available' => rand( 0, 1 ),
+						'supper'    => rand( 0, 1 ),
+					),
+					2 => array(
+						'available' => rand( 0, 1 ),
+						'breakfast' => rand( 0, 1 ),
+						'lunch'     => rand( 0, 1 ),
+						'tea'       => rand( 0, 1 ),
+						'supper'    => rand( 0, 1 ),
+					),
+					3 => array(
+						'available' => rand( 0, 1 ),
+						'breakfast' => rand( 0, 1 ),
+						'lunch'     => rand( 0, 1 ),
+						'tea'       => rand( 0, 1 ),
+						'supper'    => rand( 0, 1 ),
+					),
+					4 => array(
+						'available' => rand( 0, 1 ),
+						'breakfast' => rand( 0, 1 ),
+						'lunch'     => rand( 0, 1 ),
+						'tea'       => rand( 0, 1 ),
+						'supper'    => rand( 0, 1 ),
+					),
+				),
+			);
+
+			$this->insert_dummy_data( $data );
+		}
+	}
+
+	/**
+	 * Format and insert dummy registration data.
+	 *
+	 * Send dummy registration data to registration model in
+	 * valid format.
+	 *
+	 * @access private
+	 *
+	 * @return mixed
+	 */
+	private function insert_dummy_data( $data ) {
+
+		// Registration data.
+		$insert_data = array(
+			'church' => $data['church'],
+			'name' => $data['name'],
+			'gender' => $data['gender'],
+			'age' => $data['age'],
+			'accommodation' => $data['accommodation'],
+			'hot_water' => 0,
+			'milk' => 0,
+			'inserted_by' => 1,
+		);
+
+		// Insert attendee personal data and get attendee id.
+		$attendee_id = $this->registration_model->register( $insert_data );
+		// If attendee added, insert date and time.
+		if ( $attendee_id ) {
+			$this->insert_dates_time( $attendee_id, $data['day'] );
+		}
+
+		return ( ! empty( $attendee_id ) );
 	}
 
 	/**

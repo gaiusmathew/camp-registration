@@ -9,10 +9,7 @@
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="<?= base_url( 'assets/components/bootstrap/dist/css/bootstrap.min.css' ) ?>">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?= base_url( 'assets/dist/css/AdminLTE.css' ) ?>">
-
-  <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="<?= base_url( 'assets/dist/css/AdminLTE.min.css' ) ?>">
 </head>
 <body class="hold-transition login-page">
 <input type="hidden" id="base_url" value="<?= base_url(); ?>">

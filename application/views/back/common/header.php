@@ -18,9 +18,6 @@
 	   folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?= base_url( 'assets/dist/css/skins/skin-blue.min.css'); ?>">
 
-  <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">

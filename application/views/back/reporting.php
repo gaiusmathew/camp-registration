@@ -76,15 +76,15 @@ defined( 'BASEPATH' ) or exit( 'God bless you!' );
 						</div>
 						<!-- /.box-header -->
 						<div class="box-body">
-							<div class="col-md-12">
-								<div class="col-xs-2">
+							<div class="col-md-9">
+								<div class="col-xs-4">
 									<div class="form-group has-feedback">
 										<label>Name</label>
 										<input name="name" id="name" class="form-control attendee-filter" placeholder="Full name">
 										<span class="glyphicon glyphicon-user form-control-feedback"></span>
 									</div>
 								</div>
-								<div class="col-xs-2">
+								<div class="col-xs-4">
 									<div class="form-group has-feedback">
 										<label>Church</label>
 										<select class="form-control attendee-filter select2" id="church">
@@ -97,7 +97,7 @@ defined( 'BASEPATH' ) or exit( 'God bless you!' );
 										</select>
 									</div>
 								</div>
-								<div class="col-xs-2">
+								<div class="col-xs-4">
 									<div class="form-group has-feedback">
 										<label>Gender</label>
 										<select class="form-control attendee-filter select2" id="gender">
@@ -107,9 +107,10 @@ defined( 'BASEPATH' ) or exit( 'God bless you!' );
 										</select>
 									</div>
 								</div>
-								<div class="col-xs-2">
+                                <div class="clearfix"></div>
+								<div class="col-xs-4">
 									<div class="form-group has-feedback">
-										<div class="col-xs-6">
+										<div class="col-xs-6 no-padding-left">
 											<label>Age from</label>
 											<select class="form-control attendee-filter select2" id="age_from">
 												<option value="">Select age</option>
@@ -118,7 +119,7 @@ defined( 'BASEPATH' ) or exit( 'God bless you!' );
 												<?php endfor; ?>
 											</select>
 										</div>
-										<div class="col-xs-6">
+										<div class="col-xs-6 no-padding-right">
 											<label>Age to</label>
 											<select class="form-control attendee-filter select2" id="age_to">
 												<option value="">Select age</option>
@@ -129,63 +130,62 @@ defined( 'BASEPATH' ) or exit( 'God bless you!' );
 										</div>
 									</div>
 								</div>
-								<div class="col-xs-3">
-									<div class="col-xs-6">
-										<div class="form-group has-feedback">
-											<label>Day</label>
-											<select class="form-control attendee-filter select2" id="day">
-												<option value="">Select day</option>
-												<option value="1">Day 1</option>
-												<option value="2">Day 2</option>
-												<option value="3">Day 3</option>
-												<option value="4">Day 4</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-xs-6">
-										<div class="form-group has-feedback">
-											<label>Time</label>
-											<select class="form-control attendee-filter select2" id="time">
-												<option value="">Select time</option>
-												<option value="breakfast">Breakfast</option>
-												<option value="lunch">Lunch</option>
-												<option value="tea">Tea</option>
-												<option value="supper">Supper</option>
-											</select>
-										</div>
-									</div>
-								</div>
-								<div class="col-xs-1">
-									<div class="form-group has-feedback">
-										<label>Accommodation</label>
-										<select class="form-control attendee-filter select2" id="accommodation">
-											<option value="">Select</option>
-											<option value="1">Yes</option>
-											<option value="0">No</option>
-										</select>
-									</div>
-								</div>
-							</div>
+                                <div class="col-xs-4">
+                                    <div class="col-xs-6 no-padding-left">
+                                        <div class="form-group has-feedback">
+                                            <label>Day</label>
+                                            <select class="form-control attendee-filter select2" id="day">
+                                                <option value="">Select day</option>
+                                                <option value="1">Day 1</option>
+                                                <option value="2">Day 2</option>
+                                                <option value="3">Day 3</option>
+                                                <option value="4">Day 4</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 no-padding-right">
+                                        <div class="form-group has-feedback">
+                                            <label>Time</label>
+                                            <select class="form-control attendee-filter select2" id="time">
+                                                <option value="">Select time</option>
+                                                <option value="breakfast">Breakfast</option>
+                                                <option value="lunch">Lunch</option>
+                                                <option value="tea">Tea</option>
+                                                <option value="supper">Supper</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="form-group has-feedback">
+                                        <label>Accommodation</label>
+                                        <select class="form-control attendee-filter select2" id="accommodation">
+                                            <option value="">Select</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="small-box bg-green">
+                                    <div class="inner">
+                                        <h3>
+                                            <span id="attendees_counts">Attendees</span>
+                                        </h3>
+                                    </div>
+                                    <a href="#" class="small-box-footer">
+                                        <h3>
+                                            <span id="attendees_count">0</span>
+                                        </h3>
+                                    </a>
+                                </div>
+                            </div>
 						</div>
 						<!-- /.box-body -->
 					</div>
 					<div class="box">
-						<div class="box-header">
-							<div class="col-lg-3 col-xs-6 pull-right text-center">
-								<div class="small-box bg-green">
-									<div class="inner">
-										<h3>
-											<span id="attendees_counts">Attendees</span>
-										</h3>
-									</div>
-									<a href="#" class="small-box-footer">
-										<h3>
-											<span id="attendees_count">0</span>
-										</h3>
-									</a>
-								</div>
-							</div>
-						</div>
+						<div class="box-header"></div>
 						<!-- /.box-header -->
 						<div class="box-body">
 							<table id="attendees_table" class="table table-bordered table-striped">
