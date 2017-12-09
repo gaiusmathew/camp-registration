@@ -67,6 +67,12 @@ class Reporting_model extends CI_Model {
 			$this->datatables->where( 'rg.age <=', $to );
 		}
 
+		// Accommodation filter.
+		if ( $this->input->post( 'at_acco' ) !== '' ) {
+			$acco = $this->input->post( 'at_acco' ) == 0 ? 0 : 1;
+			$this->datatables->where( 'rg.accommodation', $acco );
+		}
+
 		// Days and time filter.
 		if ( $this->input->post( 'at_day' ) ) {
 			$this->datatables->join( 'dates as dt', 'rg.id = dt.attendee_id' );

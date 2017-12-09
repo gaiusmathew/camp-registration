@@ -107,7 +107,7 @@ defined( 'BASEPATH' ) or exit( 'God bless you!' );
 										</select>
 									</div>
 								</div>
-								<div class="col-xs-3">
+								<div class="col-xs-2">
 									<div class="form-group has-feedback">
 										<div class="col-xs-6">
 											<label>Age from</label>
@@ -155,16 +155,36 @@ defined( 'BASEPATH' ) or exit( 'God bless you!' );
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-md-12">
-
+								<div class="col-xs-1">
+									<div class="form-group has-feedback">
+										<label>Accommodation</label>
+										<select class="form-control attendee-filter select2" id="accommodation">
+											<option value="">Select</option>
+											<option value="1">Yes</option>
+											<option value="0">No</option>
+										</select>
+									</div>
+								</div>
 							</div>
 						</div>
 						<!-- /.box-body -->
 					</div>
 					<div class="box">
 						<div class="box-header">
-							<h3 class="box-title">Attendee List</h3>
+							<div class="col-lg-3 col-xs-6 pull-right text-center">
+								<div class="small-box bg-green">
+									<div class="inner">
+										<h3>
+											<span id="attendees_counts">Attendees</span>
+										</h3>
+									</div>
+									<a href="#" class="small-box-footer">
+										<h3>
+											<span id="attendees_count">0</span>
+										</h3>
+									</a>
+								</div>
+							</div>
 						</div>
 						<!-- /.box-header -->
 						<div class="box-body">

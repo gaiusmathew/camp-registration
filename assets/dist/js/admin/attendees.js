@@ -58,12 +58,18 @@ $( function ( $ ) {
                     data.at_age_to = $( '#age_to' ).val();
                     data.at_day = $( '#day' ).val();
                     data.at_time = $( '#time' ).val();
+                    data.at_acco = $( '#accommodation' ).val();
                 }
             },
             "columnDefs": [{
                 'orderable': false,
                 'targets': [1,4,5]
             }],
+        });
+
+        // After datatables loaded.
+        oTable.on( 'xhr.dt', function ( e, settings, json, xhr ) {
+            $( '#attendees_count' ).html( json.recordsTotal );
         });
 
         // Refresh attendee list on filter.

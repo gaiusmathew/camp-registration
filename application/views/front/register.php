@@ -51,7 +51,7 @@
 							</div>
 							<div class="row">
 								<div class="col-xs-6">
-									<div class="form-group has-feedback">
+									<div class="form-group">
 										<label>Age</label>
 										<input type="number" name="age" id="age" min="1" max="120" class="form-control" placeholder="Age" value="<?= set_value( 'age' ); ?>" required>
 										<span class="glyphicons glyphicons-uk-rat-18 form-control-feedback"></span>
