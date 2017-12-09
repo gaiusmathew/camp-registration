@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 <body>
 	<div id="container" align="center">
-		<img src="http://i.imgur.com/a86MqUy.png">
+		<img src="assets/dist/img/404.png">
 	</div>
 </body>
 </html>
