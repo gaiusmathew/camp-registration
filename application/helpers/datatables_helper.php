@@ -46,3 +46,15 @@ function getDeleteLink( $id ) {
 
 	return '';
 }
+
+/**
+ * Get firsr letter capitalized.
+ *
+ * @param string $name String name.
+ *
+ * @return string
+ */
+function getCaps( $name ) {
+
+	return ucwords( $name );
+}

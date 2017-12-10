@@ -97,6 +97,7 @@ class Reporting_model extends CI_Model {
 			}
 		}
 
+		$this->datatables->edit_column( 'name', '$1', 'getCaps(name)' );
 		// Add gender full text instead of short term from db.
 		$this->datatables->edit_column( 'gender', '$1', 'getGender(gender)' );
 		// Add status span for better visibility.
@@ -104,6 +105,78 @@ class Reporting_model extends CI_Model {
 		$this->datatables->add_column( 'delete', '$1', 'getDeleteLink(id)' );
 
 		return $this->datatables->generate();
+	}
+
+	/**
+	 * Get list of attendees to export.
+	 *
+	 * No pagination or limit. Export all!
+	 *
+	 * @access public
+	 *
+	 * @return array
+	 */
+	public function get_attendees_export() {
+
+		// Start db query.
+		$this->db->select( 'rg.id as id, rg.name, ch.name as church, age, gender, accommodation' );
+		$this->db->from( 'registration as rg' );
+		$this->db->join( 'churches as ch', 'rg.church = ch.id' );
+
+		// Name filter.
+		if ( $this->input->post( 'name' ) ) {
+			$this->db->like( 'rg.name', trim( $this->input->post( 'name' ) ) );
+		}
+
+		// Church filter.
+		if ( $this->input->post( 'church' ) ) {
+			$this->db->where( 'rg.church', (int) $this->input->post( 'church' ) );
+		}
+
+		// Gender filter.
+		if ( $this->input->post( 'gender' ) ) {
+			$this->db->where( 'rg.gender', $this->input->post( 'gender' ) );
+		}
+
+		// Age filter.
+		if ( $this->input->post( 'age_from' ) || $this->input->post( 'age_to' ) ) {
+			$from = empty( $this->input->post( 'age_from' ) ) ? 1 : (int) $this->input->post( 'age_from' );
+			$to = empty( $this->input->post( 'age_to' ) ) ? 120 : (int) $this->input->post( 'age_to' );
+			$this->db->where( 'rg.age >=', $from );
+			$this->db->where( 'rg.age <=', $to );
+		}
+
+		// Accommodation filter.
+		if ( $this->input->post( 'accommodation' ) !== '' ) {
+			$acco = $this->input->post( 'accommodation' ) == 0 ? 0 : 1;
+			$this->db->where( 'rg.accommodation', $acco );
+		}
+
+		// Days and time filter.
+		if ( $this->input->post( 'day' ) ) {
+			$this->db->join( 'dates as dt', 'rg.id = dt.attendee_id' );
+			// Get field name from day value.
+			$day_field = $this->get_date_field( $this->input->post( 'day' ) );
+			if ( $day_field ) {
+				// Add day condtion.
+				$this->db->where( 'dt.' . $day_field, '1' );
+
+				// Time filter works only if you select day filter.
+				if ( $this->input->post( 'time' ) ) {
+					// Join timing table.
+					$this->db->join( 'timing as ti', 'dt.id = ti.date_id' );
+					// Get timing field name from value.
+					$time_field = $this->get_time_field( $this->input->post( 'time' ) );
+					if ( $time_field ) {
+						// Add timing filter too.
+						$this->db->where( 'ti.day', $this->input->post( 'day' ) );
+						$this->db->where( 'ti.' . $time_field, '1' );
+					}
+				}
+			}
+		}
+
+		return $this->db->get()->result();
 	}
 
 	/**

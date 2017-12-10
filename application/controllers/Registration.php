@@ -311,7 +311,7 @@ class Registration extends CI_Controller {
 		// Set validation rules.
 		$this->form_validation->set_rules( 'church', 'church', 'trim|required|integer' );
 		$this->form_validation->set_rules( 'name', 'name', 'trim|required' );
-		$this->form_validation->set_rules( 'age', 'age', 'trim|required|integer' );
+		$this->form_validation->set_rules( 'age', 'age', 'trim|required|integer|less_than[121]|greater_than[0]' );
 		$this->form_validation->set_rules( 'gender', 'gender', 'trim|required|max_length[1]' );
 		$this->form_validation->set_rules( 'day[]', 'day', 'callback_dates_required');
 

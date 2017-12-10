@@ -56,6 +56,7 @@ $route['logout'] = 'user/logout';
 
 $route['admin/report'] = 'admin/index';
 $route['admin/get-report-data'] = 'admin/get_attendees';
+$route['admin/export'] = 'admin/export_attendees';
 $route['admin/delete/attendee/(:any)'] = 'admin/delete_attendee/$1';
 
 $route['default_controller'] = 'registration';

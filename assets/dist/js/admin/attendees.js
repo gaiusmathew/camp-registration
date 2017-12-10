@@ -78,8 +78,15 @@ $( function ( $ ) {
         });
 
         // Ask for confirmation before delete.
-        $( '#attendees_table' ).on( 'click', '.delete' ,function() {
+        $( '#attendees_table' ).on( 'click', '.delete', function() {
             return confirm( 'Are you sure? This can\'t be undone.' );
+        });
+
+        // Export to excel.
+        $( '#export' ).on( 'click', function() {
+            if ( confirm( 'Are you sure that you want to export this to excel? This may take some time.' ) ) {
+                $( '#filter_form' ).submit();
+            }
         });
     });
 });
