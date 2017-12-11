@@ -78,7 +78,7 @@ class Admin extends CI_Controller {
 	 *
 	 * @return bool
 	 */
-	public function delete_attendee( $id ) {
+	public function delete_attendee() {
 
 		// Get the id from url.
 		$id = $this->uri->segment( 4 );
@@ -101,14 +101,11 @@ class Admin extends CI_Controller {
 	}
 
 	/**
-	 * Get attendees list based on the filters.
+	 * Export attendees list based on the filters.
 	 *
-	 * Get the json output to display on datatables.
-	 * This functions takes memory! Seriously.
 	 * Filter the sql query and get the output based on
 	 * the filters applied.
-	 * Sorting and pagination will also be taken care by
-	 * Datatables library.
+	 * Pass this data to excel library and generate output.
 	 *
 	 * @access public
 	 *
@@ -116,16 +113,29 @@ class Admin extends CI_Controller {
 	 */
 	public function export_attendees() {
 
+		// Load model.
 		$this->load->model( 'back/reporting_model' );
 
 		// Generate output and display it.
 		$data = $this->reporting_model->get_attendees_export();
 
-		$this->export( $data );
+		// Attempt to export to excel.
+		try {
+			$this->export( $data );
+		} catch ( Exception $e ) {
+			// Pray.
+		}
+
+		redirect( 'admin' );
 	}
 
 	/**
 	 * Export attendees list to excel.
+	 *
+	 * Use the PHPExcel library and export the result
+	 * data as excel sheet.
+	 *
+	 * @param array $data Array of data objects.
 	 *
 	 * @access public
 	 *
@@ -142,7 +152,7 @@ class Admin extends CI_Controller {
 		// Name the worksheet
 		$this->jjexcel->getActiveSheet()->setTitle( 'Camp Attendee List' );
 
-		// Set cell A1 content with some text.
+		// Set cells titles.
 		$this->jjexcel->getActiveSheet()->setCellValue( 'A1', 'Name' );
 		$this->jjexcel->getActiveSheet()->setCellValue( 'B1', 'Church' );
 		$this->jjexcel->getActiveSheet()->setCellValue( 'C1', 'Age' );
@@ -150,28 +160,31 @@ class Admin extends CI_Controller {
 
 		// Loop through each data and add columns.
 		for ( $i = 0; $i < count( $data ); $i++ ) {
-			$j = $i + 2;
-			$this->jjexcel->getActiveSheet()->setCellValue( 'A' . $j, ucwords( $data[ $i ]->name ) );
-			$this->jjexcel->getActiveSheet()->setCellValue( 'B' . $j, ucwords( $data[ $i ]->church ) );
-			$this->jjexcel->getActiveSheet()->setCellValue( 'C' . $j, $data[ $i ]->age );
-			$this->jjexcel->getActiveSheet()->setCellValue( 'D' . $j, $data[ $i ]->gender == 'M' ? 'Male' : 'Female' );
+			// Set the cell number.
+			$cell_no = $i + 2;
+
+			// Set excel content.
+			$this->jjexcel->getActiveSheet()->setCellValue( 'A' . $cell_no, ucwords( $data[ $i ]->name ) );
+			$this->jjexcel->getActiveSheet()->setCellValue( 'B' . $cell_no, ucwords( $data[ $i ]->church ) );
+			$this->jjexcel->getActiveSheet()->setCellValue( 'C' . $cell_no, $data[ $i ]->age );
+			$this->jjexcel->getActiveSheet()->setCellValue( 'D' . $cell_no, $data[ $i ]->gender == 'M' ? 'Male' : 'Female' );
 		}
 
-		$this->jjexcel->getActiveSheet()->getStyle( 'A1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+		// Align excel titles to center.
+		$this->jjexcel->getActiveSheet()->getStyle( 'A1:D1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-		$filename='attendees_' . time() . '.xlsx';
+		// Set a file name and add suffix with time.
+		$filename = 'attendees_' . time() . '.xlsx';
 
-		header('Content-Type: application/vnd.ms-excel'); //mime type
-		header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
-		header('Cache-Control: max-age=0'); //no cache
+		// Let the browser know the file is excel.
+		header( 'Content-Type: application/vnd.ms-excel' );
+		header( 'Content-Disposition: attachment;filename="' . $filename . '"' );
+		header( 'Cache-Control: max-age=0' );
 
-		//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
-		//if you want to save it as .XLSX Excel 2007 format
+		// Save it to Excel2007 format.
 		$objWriter = PHPExcel_IOFactory::createWriter( $this->jjexcel, 'Excel2007' );
 
 		// Force user to download the Excel file without writing it to server's HD
-		$objWriter->save('php://output');
-
-		redirect( 'admin' );
+		$objWriter->save( 'php://output' );
 	}
 }

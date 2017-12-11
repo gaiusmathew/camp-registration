@@ -1,10 +1,9 @@
 <!-- /.content-wrapper -->
 <footer class="main-footer">
 	<div class="pull-right hidden-xs">
-		<b>Version</b> 2.4.0
+		<b>Version</b> 1.0 (Adam)
 	</div>
-	<strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-	reserved.
+	<strong>Copyright &copy; <?= date( 'Y' ) ?> You.</strong> No rights reserved.
 </footer>
 
 <!-- /.control-sidebar -->
@@ -22,11 +21,9 @@
 <script src="<?= base_url( 'assets/components/datatables.net/js/jquery.dataTables.min.js'); ?>"></script>
 <script src="<?= base_url( 'assets/components/datatables.net/js/fnReloadAjax.min.js'); ?>"></script>
 <script src="<?= base_url( 'assets/components/datatables.net-bs/js/dataTables.bootstrap.min.js'); ?>"></script>
-<!--<script src="<?php // base_url( 'assets/components/datatables-extra/dataTables.buttons.min.js'); ?>"></script>
-<script src="<?php // base_url( 'assets/components/datatables-extra/buttons.print.min.js'); ?>"></script>-->
 <!-- Select2 -->
 <script src="<?= base_url( 'assets/plugins/select2/js/select2.min.js' ) ?>"></script>
 <!-- Custom purposes -->
-<script src="<?= base_url( 'assets/dist/js/admin/attendees.js'); ?>"></script>
+<script src="<?= base_url( 'assets/dist/js/admin/attendees.min.js'); ?>"></script>
 </body>
 </html>

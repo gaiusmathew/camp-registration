@@ -44,53 +44,57 @@ class Reporting_model extends CI_Model {
 		$this->datatables->from( 'registration as rg' );
 		$this->datatables->join( 'churches as ch', 'rg.church = ch.id' );
 
+		// Full post data.
+		$post = $this->input->post();
+
 		// Name filter.
-		if ( $this->input->post( 'at_name' ) ) {
-			$this->datatables->like( 'rg.name', trim( $this->input->post( 'at_name' ) ) );
+		if ( ! empty( $post['name'] ) ) {
+			$this->datatables->like( 'rg.name', trim( $post['name'] ) );
 		}
 
 		// Church filter.
-		if ( $this->input->post( 'at_church' ) ) {
-			$this->datatables->where( 'rg.church', (int) $this->input->post( 'at_church' ) );
+		if ( ! empty( $post['church'] ) ) {
+			$this->datatables->where( 'rg.church', (int) $post['church'] );
 		}
 
 		// Gender filter.
-		if ( $this->input->post( 'at_gender' ) ) {
-			$this->datatables->where( 'rg.gender', $this->input->post( 'at_gender' ) );
+		if ( ! empty( $post['gender'] ) && in_array( $post['gender'], array( 'M', 'F' ) ) ) {
+			$this->datatables->where( 'rg.gender', $post['gender'] );
 		}
 
-		// Age filter.
-		if ( $this->input->post( 'at_age_from' ) || $this->input->post( 'at_age_to' ) ) {
-			$from = empty( $this->input->post( 'at_age_from' ) ) ? 1 : (int) $this->input->post( 'at_age_from' );
-			$to = empty( $this->input->post( 'at_age_to' ) ) ? 120 : (int) $this->input->post( 'at_age_to' );
-			$this->datatables->where( 'rg.age >=', $from );
-			$this->datatables->where( 'rg.age <=', $to );
+		// Age from filter.
+		if ( ! empty( $post['age_from'] ) ) {
+			$this->datatables->where( 'rg.age >=', (int) $post['age_from'] );
+		}
+
+		// Age to filter.
+		if ( ! empty( $post['age_to'] ) ) {
+			$this->datatables->where( 'rg.age <=', (int) $post['age_to'] );
 		}
 
 		// Accommodation filter.
-		if ( $this->input->post( 'at_acco' ) !== '' ) {
-			$acco = $this->input->post( 'at_acco' ) == 0 ? 0 : 1;
-			$this->datatables->where( 'rg.accommodation', $acco );
+		if ( isset( $post['accommodation'] ) && $post['accommodation'] !== '' ) {
+			$this->datatables->where( 'rg.accommodation', (int) $post['accommodation'] );
 		}
 
 		// Days and time filter.
-		if ( $this->input->post( 'at_day' ) ) {
+		if ( ! empty( $post['day'] ) ) {
 			$this->datatables->join( 'dates as dt', 'rg.id = dt.attendee_id' );
 			// Get field name from day value.
-			$day_field = $this->get_date_field( $this->input->post( 'at_day' ) );
+			$day_field = $this->get_date_field( $post['day'] );
 			if ( $day_field ) {
 				// Add day condtion.
 				$this->datatables->where( 'dt.' . $day_field, '1' );
 
 				// Time filter works only if you select day filter.
-				if ( $this->input->post( 'at_time' ) ) {
+				if ( ! empty( $post['time'] ) ) {
 					// Join timing table.
 					$this->datatables->join( 'timing as ti', 'dt.id = ti.date_id' );
 					// Get timing field name from value.
-					$time_field = $this->get_time_field( $this->input->post( 'at_time' ) );
+					$time_field = $this->get_time_field( $post['time'] );
 					if ( $time_field ) {
 						// Add timing filter too.
-						$this->datatables->where( 'ti.day', $this->input->post( 'at_day' ) );
+						$this->datatables->where( 'ti.day', $post['day'] );
 						$this->datatables->where( 'ti.' . $time_field, '1' );
 					}
 				}
@@ -123,53 +127,57 @@ class Reporting_model extends CI_Model {
 		$this->db->from( 'registration as rg' );
 		$this->db->join( 'churches as ch', 'rg.church = ch.id' );
 
+		// Full post data.
+		$post = $this->input->post();
+
 		// Name filter.
-		if ( $this->input->post( 'name' ) ) {
-			$this->db->like( 'rg.name', trim( $this->input->post( 'name' ) ) );
+		if ( ! empty( $post['name'] ) ) {
+			$this->db->like( 'rg.name', trim( $post['name'] ) );
 		}
 
 		// Church filter.
-		if ( $this->input->post( 'church' ) ) {
-			$this->db->where( 'rg.church', (int) $this->input->post( 'church' ) );
+		if ( ! empty( $post['church'] ) ) {
+			$this->db->where( 'rg.church', (int) $post['church'] );
 		}
 
 		// Gender filter.
-		if ( $this->input->post( 'gender' ) ) {
-			$this->db->where( 'rg.gender', $this->input->post( 'gender' ) );
+		if ( ! empty( $post['gender'] ) && in_array( $post['gender'], array( 'M', 'F' ) ) ) {
+			$this->db->where( 'rg.gender', $post['gender'] );
 		}
 
-		// Age filter.
-		if ( $this->input->post( 'age_from' ) || $this->input->post( 'age_to' ) ) {
-			$from = empty( $this->input->post( 'age_from' ) ) ? 1 : (int) $this->input->post( 'age_from' );
-			$to = empty( $this->input->post( 'age_to' ) ) ? 120 : (int) $this->input->post( 'age_to' );
-			$this->db->where( 'rg.age >=', $from );
-			$this->db->where( 'rg.age <=', $to );
+		// Age from filter.
+		if ( ! empty( $post['age_from'] ) ) {
+			$this->db->where( 'rg.age >=', (int) $post['age_from'] );
+		}
+
+		// Age to filter.
+		if ( ! empty( $post['age_to'] ) ) {
+			$this->db->where( 'rg.age <=', (int) $post['age_to'] );
 		}
 
 		// Accommodation filter.
-		if ( $this->input->post( 'accommodation' ) !== '' ) {
-			$acco = $this->input->post( 'accommodation' ) == 0 ? 0 : 1;
-			$this->db->where( 'rg.accommodation', $acco );
+		if ( isset( $post['accommodation'] ) && $post['accommodation'] !== '' ) {
+			$this->db->where( 'rg.accommodation', (int) $post['accommodation'] );
 		}
 
 		// Days and time filter.
-		if ( $this->input->post( 'day' ) ) {
+		if ( ! empty( $post['day'] ) ) {
 			$this->db->join( 'dates as dt', 'rg.id = dt.attendee_id' );
 			// Get field name from day value.
-			$day_field = $this->get_date_field( $this->input->post( 'day' ) );
+			$day_field = $this->get_date_field( $post['day'] );
 			if ( $day_field ) {
 				// Add day condtion.
 				$this->db->where( 'dt.' . $day_field, '1' );
 
 				// Time filter works only if you select day filter.
-				if ( $this->input->post( 'time' ) ) {
+				if ( ! empty( $post['time'] ) ) {
 					// Join timing table.
 					$this->db->join( 'timing as ti', 'dt.id = ti.date_id' );
 					// Get timing field name from value.
-					$time_field = $this->get_time_field( $this->input->post( 'time' ) );
+					$time_field = $this->get_time_field( $post['time'] );
 					if ( $time_field ) {
 						// Add timing filter too.
-						$this->db->where( 'ti.day', $this->input->post( 'day' ) );
+						$this->db->where( 'ti.day', $post['day'] );
 						$this->db->where( 'ti.' . $time_field, '1' );
 					}
 				}

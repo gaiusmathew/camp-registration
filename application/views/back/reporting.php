@@ -111,7 +111,7 @@ defined( 'BASEPATH' ) or exit( 'God bless you!' );
                                     <div class="clearfix"></div>
                                     <div class="col-xs-4">
                                         <div class="form-group has-feedback">
-                                            <div class="col-xs-6">
+                                            <div class="col-xs-6 no-padding-left">
                                                 <label>Age from</label>
                                                 <select class="form-control attendee-filter select2" id="age_from" name="age_from">
                                                     <option value="">Select age</option>
@@ -120,7 +120,7 @@ defined( 'BASEPATH' ) or exit( 'God bless you!' );
                                                     <?php endfor; ?>
                                                 </select>
                                             </div>
-                                            <div class="col-xs-6">
+                                            <div class="col-xs-6 no-padding-right">
                                                 <label>Age to</label>
                                                 <select class="form-control attendee-filter select2" id="age_to" name="age_to">
                                                     <option value="">Select age</option>
@@ -132,7 +132,7 @@ defined( 'BASEPATH' ) or exit( 'God bless you!' );
                                         </div>
                                     </div>
                                     <div class="col-xs-4">
-                                        <div class="col-xs-6 ">
+                                        <div class="col-xs-6 no-padding-left">
                                             <div class="form-group has-feedback">
                                                 <label>Day</label>
                                                 <select class="form-control attendee-filter select2" id="day" name="day">
@@ -144,7 +144,7 @@ defined( 'BASEPATH' ) or exit( 'God bless you!' );
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-xs-6">
+                                        <div class="col-xs-6 no-padding-right">
                                             <div class="form-group has-feedback">
                                                 <label>Time</label>
                                                 <select class="form-control attendee-filter select2" id="time" name="time">
@@ -174,7 +174,7 @@ defined( 'BASEPATH' ) or exit( 'God bless you!' );
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 text-center">
                                     <div class="small-box bg-green">
                                         <div class="inner">
                                             <h3>

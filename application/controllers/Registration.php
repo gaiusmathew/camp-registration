@@ -103,12 +103,13 @@ class Registration extends CI_Controller {
 	 */
 	public function register() {
 
-		//echo '<pre>'; print_r($_POST); exit;
 		// Validate form.
 		if ( $this->validate() ) {
 
-			// Attempt to insert registration data.
-			if ( $this->insert() ) {
+			if ( $this->is_duplicate() ) {
+				$this->session->set_flashdata( 'error', 'Oh nah! This attendee was already registered.' );
+			} elseif ( $this->insert() ) {
+				// Attempt to insert registration data and return success.
 				$this->session->set_flashdata( 'success', 'Registration successful!' );
 			} else {
 				$this->session->set_flashdata( 'error', 'Oh nah! Registration failed.' );
@@ -128,13 +129,13 @@ class Registration extends CI_Controller {
 	 *
 	 * @return void
 	 */
-	public function insert_dummy( $count = 10 ) {
+	public function insert_dummy( $count = 100 ) {
 
 		$names = array( 'Sijo', 'Joel', 'Biju', 'Sabu', 'Shintu', 'Gaius', 'Abin', 'Prem', 'Vivek', 'Adyn', 'Stephen' );
 		$gender = array( 'M', 'F' );
 		for ( $i = 0; $i < $count; $i++ ) {
 			$data = array(
-				'church'        => rand( 1, 14 ),
+				'church'        => rand( 1, 3 ),
 				'name'          => $names[ rand( 0, count( $names ) - 1 ) ],
 				'age'           => rand( 1, 120 ),
 				'gender'        => $gender[ rand( 0, 1 ) ],
@@ -218,6 +219,8 @@ class Registration extends CI_Controller {
 	 * @return mixed
 	 */
 	private function insert() {
+
+		$post = $this->input->post();
 
 		// Registration data.
 		$data = array(
@@ -310,7 +313,7 @@ class Registration extends CI_Controller {
 
 		// Set validation rules.
 		$this->form_validation->set_rules( 'church', 'church', 'trim|required|integer' );
-		$this->form_validation->set_rules( 'name', 'name', 'trim|required' );
+		$this->form_validation->set_rules( 'name', 'name', 'trim|required|callback_dates_required' );
 		$this->form_validation->set_rules( 'age', 'age', 'trim|required|integer|less_than[121]|greater_than[0]' );
 		$this->form_validation->set_rules( 'gender', 'gender', 'trim|required|max_length[1]' );
 		$this->form_validation->set_rules( 'day[]', 'day', 'callback_dates_required');
@@ -335,5 +338,21 @@ class Registration extends CI_Controller {
 		);
 
 		return ! empty( $value );
+	}
+
+	/**
+	 * Check whether it is a duplicate entry.
+	 *
+	 * Same person should not be added twice.
+	 *
+	 * @return bool
+	 */
+	public function is_duplicate() {
+
+		if ( empty( $this->input->post( 'name' ) ) ) {
+			return false;
+		}
+
+		return $this->registration_model->is_duplicate();
 	}
 }

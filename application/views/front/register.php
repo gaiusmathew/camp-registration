@@ -6,7 +6,8 @@
 	<?php $error = $this->session->flashdata( 'error' ); ?>
 	<?php $success = $this->session->flashdata( 'success' ); ?>
 	<?php if ( isset( $error ) ) : ?>
-		<div class="callout callout-danger">
+		<div class="alert alert-danger alert-dismissible">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 			<?= $error ?>
 		</div>
 	<?php elseif ( isset( $success ) ) : ?>

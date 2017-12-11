@@ -137,6 +137,39 @@ class Registration_model extends CI_Model {
 	}
 
 	/**
+	 * Check if current inserting attendee is duplicate.
+	 *
+	 * @access public
+	 *
+	 * @return array
+	 */
+	public function is_duplicate() {
+
+		$post = $this->input->post();
+
+		// Filter by name.
+		$this->db->where( 'name', trim( $post['name'] ) );
+
+		// Filter by church.
+		$this->db->where( 'church', (int) $post['church'] );
+
+		// Filter by age.
+		if ( ! empty( $post['age'] ) ) {
+			$this->db->where( 'age', (int) $post['age'] );
+		}
+
+		// Filter by gender.
+		if ( ! empty( $post['gender'] ) ) {
+			$this->db->where( 'gender', $post['gender'] );
+		}
+
+		$query = $this->db->get( 'registration' );
+
+		return $query->num_rows() > 0;
+
+	}
+
+	/**
 	 * Delete and attendee in emergency.
 	 *
 	 * @param int $id Attendee ID.
