@@ -48,53 +48,53 @@ class Reporting_model extends CI_Model {
 		$post = $this->input->post();
 
 		// Name filter.
-		if ( ! empty( $post['name'] ) ) {
-			$this->datatables->like( 'rg.name', trim( $post['name'] ) );
+		if ( ! empty( $post['at_name'] ) ) {
+			$this->datatables->like( 'rg.name', trim( $post['at_name'] ) );
 		}
 
 		// Church filter.
-		if ( ! empty( $post['church'] ) ) {
-			$this->datatables->where( 'rg.church', (int) $post['church'] );
+		if ( ! empty( $post['at_church'] ) ) {
+			$this->datatables->where( 'rg.church', (int) $post['at_church'] );
 		}
 
 		// Gender filter.
-		if ( ! empty( $post['gender'] ) && in_array( $post['gender'], array( 'M', 'F' ) ) ) {
-			$this->datatables->where( 'rg.gender', $post['gender'] );
+		if ( ! empty( $post['at_gender'] ) && in_array( $post['at_gender'], array( 'M', 'F' ) ) ) {
+			$this->datatables->where( 'rg.gender', $post['at_gender'] );
 		}
 
 		// Age from filter.
-		if ( ! empty( $post['age_from'] ) ) {
-			$this->datatables->where( 'rg.age >=', (int) $post['age_from'] );
+		if ( ! empty( $post['at_age_from'] ) ) {
+			$this->datatables->where( 'rg.age >=', (int) $post['at_age_from'] );
 		}
 
 		// Age to filter.
-		if ( ! empty( $post['age_to'] ) ) {
-			$this->datatables->where( 'rg.age <=', (int) $post['age_to'] );
+		if ( ! empty( $post['at_age_to'] ) ) {
+			$this->datatables->where( 'rg.age <=', (int) $post['at_age_to'] );
 		}
 
 		// Accommodation filter.
-		if ( isset( $post['accommodation'] ) && $post['accommodation'] !== '' ) {
-			$this->datatables->where( 'rg.accommodation', (int) $post['accommodation'] );
+		if ( isset( $post['at_acco'] ) && $post['at_acco'] !== '' ) {
+			$this->datatables->where( 'rg.accommodation', (int) $post['at_acco'] );
 		}
 
 		// Days and time filter.
-		if ( ! empty( $post['day'] ) ) {
+		if ( ! empty( $post['at_day'] ) ) {
 			$this->datatables->join( 'dates as dt', 'rg.id = dt.attendee_id' );
 			// Get field name from day value.
-			$day_field = $this->get_date_field( $post['day'] );
+			$day_field = $this->get_date_field( $post['at_day'] );
 			if ( $day_field ) {
 				// Add day condtion.
 				$this->datatables->where( 'dt.' . $day_field, '1' );
 
 				// Time filter works only if you select day filter.
-				if ( ! empty( $post['time'] ) ) {
+				if ( ! empty( $post['at_time'] ) ) {
 					// Join timing table.
 					$this->datatables->join( 'timing as ti', 'dt.id = ti.date_id' );
 					// Get timing field name from value.
-					$time_field = $this->get_time_field( $post['time'] );
+					$time_field = $this->get_time_field( $post['at_time'] );
 					if ( $time_field ) {
 						// Add timing filter too.
-						$this->datatables->where( 'ti.day', $post['day'] );
+						$this->datatables->where( 'ti.day', $post['at_day'] );
 						$this->datatables->where( 'ti.' . $time_field, '1' );
 					}
 				}
