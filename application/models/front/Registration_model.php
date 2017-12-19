@@ -137,6 +137,31 @@ class Registration_model extends CI_Model {
 	}
 
 	/**
+	 * Get list of users pre registered.
+	 *
+	 * Filter by church.
+	 *
+	 * @access public
+	 *
+	 * @param int $id Church ID.
+	 *
+	 * @return array
+	 */
+	public function get_registrants( $id ) {
+
+		// Continue only if id found.
+		if ( empty( $id ) ) {
+			return array();
+		}
+
+		$this->db->select( 'name' );
+		$this->db->from( 'preregistration' );
+		$this->db->where( 'church', (int) $id );
+
+		return $this->db->get()->result();
+	}
+
+	/**
 	 * Check if current inserting attendee is duplicate.
 	 *
 	 * @access public

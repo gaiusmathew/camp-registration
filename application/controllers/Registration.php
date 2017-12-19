@@ -355,4 +355,30 @@ class Registration extends CI_Controller {
 
 		return $this->registration_model->is_duplicate();
 	}
+
+	/**
+	 * Get registrant names by church.
+	 *
+	 * @return json
+	 */
+	public function get_registrants() {
+
+		$data = array();
+
+		// Get the church id from url.
+		$id = $this->uri->segment( 3 );
+
+		// Do not continue if valid id is not found.
+		if ( ! empty( $id ) ) {
+
+			$this->load->model( 'front/registration_model' );
+
+			// Get pre registered users.
+			$data = $this->registration_model->get_registrants( $id );
+
+			$data = array_map( 'reset', $data );
+		}
+
+		echo json_encode( $data );
+	}
 }

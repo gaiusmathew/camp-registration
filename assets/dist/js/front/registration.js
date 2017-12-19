@@ -29,6 +29,9 @@ $( function ( $ ) {
      */
     $(function () {
 
+        // Base url.
+        var baseUrl = $( '#base_url' ).val();
+
         // Initialize iCheck.
         $( 'input' ).iCheck({
             checkboxClass: 'icheckbox_flat-blue',
@@ -63,6 +66,15 @@ $( function ( $ ) {
         // Shortcut to select all dates and timing.
         $( '#all_days' ).on( 'ifChecked', function() {
             $( '.day' ).not( '.disabled' ).iCheck( 'check' );
+        });
+
+        // Get the pre registered names on church selection.
+        $( '#church' ).on( 'change', function() {
+            $.getJSON( baseUrl + '/get/registrants/' + $( this ).val(), function( data ) {
+                $( "#name" ).autocomplete({
+                    source: data
+                });
+            });
         });
     });
 });

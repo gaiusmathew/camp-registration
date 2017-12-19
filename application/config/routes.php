@@ -53,6 +53,7 @@ $route['registration'] = 'registration/index';
 $route['login'] = 'user/login';
 $route['validate'] = 'user/valid_login';
 $route['logout'] = 'user/logout';
+$route['get/registrants/(:any)'] = 'registration/get_registrants/$1';
 
 $route['admin/report'] = 'admin/index';
 $route['admin/get-report-data'] = 'admin/get_attendees';

@@ -13,7 +13,9 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="<?= base_url( 'assets/dist/css/AdminLTE.min.css' ) ?>">
   <!-- iCheck -->
-  <link rel="stylesheet" href="<?= base_url( 'assets/plugins/iCheck/flat/blue.css' ) ?>">
+  <link rel="stylesheet" href="<?= base_url( 'assets/plugins/iCheck/flat/blue.min.css' ) ?>">
+  <!-- jQuery UI -->
+  <link rel="stylesheet" href="<?= base_url( 'assets/plugins/jQueryUI/jquery-ui.min.css' ) ?>">
 </head>
 <body class="hold-transition register-page">
 <input type="hidden" id="base_url" value="<?= base_url(); ?>">
