@@ -35,12 +35,24 @@ function is_admin() {
  * If user is not logged in, redirect user
  * to redirect to login page.
  *
+ * @param string $user Username.
+ *
  * @return bool
  */
-function force_login() {
+function force_login( $user = '' ) {
+
+	// Get core instance.
+	$ci =& get_instance();
 
 	// Check if user is logged in.
 	if ( ! is_loggedin() ) {
+		redirect( 'login' );
+	}
+
+	if ( $user === 'admin' && ! is_admin() ) {
+		// Show error message.
+		$ci->session->set_flashdata( 'error', 'Please login as admin.' );
+
 		redirect( 'login' );
 	}
 }

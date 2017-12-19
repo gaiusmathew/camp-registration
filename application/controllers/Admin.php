@@ -23,7 +23,7 @@ class Admin extends CI_Controller {
 		$this->load->helper( array( 'url', 'user' ) );
 
 		// Force login.
-		force_login();
+		force_login( 'admin' );
 	}
 
 	/**
