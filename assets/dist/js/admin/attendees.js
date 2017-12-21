@@ -42,8 +42,6 @@ $( function ( $ ) {
 
         // Data table.
         var oTable = $( '#attendees_table' ).dataTable({
-            //'dom': 'Blrtip',
-            //'buttons': ['print'],
             'processing': true,
             'serverSide': true,
             'searching': false,
@@ -69,7 +67,9 @@ $( function ( $ ) {
 
         // After datatables loaded.
         oTable.on( 'xhr.dt', function ( e, settings, json, xhr ) {
-            $( '#attendees_count' ).html( json.recordsTotal );
+            if ( json.hasOwnProperty( 'recordsTotal' ) ) {
+                $( '#attendees_count' ).html( json.recordsTotal );
+            }
         });
 
         // Refresh attendee list on filter.
@@ -86,6 +86,14 @@ $( function ( $ ) {
         $( '#export' ).on( 'click', function() {
             if ( confirm( 'Are you sure that you want to export this to excel? This may take some time.' ) ) {
                 $( '#filter_form' ).submit();
+            }
+        });
+
+        // Do not submit form on enter.
+        $( '#name' ).keypress( 'keypress', function( e ) {
+            if ( e.which == 13 ) {
+                oTable.fnReloadAjax();
+                return false;
             }
         });
     });

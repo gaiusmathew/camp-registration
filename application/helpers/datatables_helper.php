@@ -25,9 +25,9 @@ function getGender( $gender ) {
 function getAccommodation( $required ) {
 
 	if ( boolval( $required ) ) {
-		return '<small class="label bg-green">Required</small>';
+		return '<p class="text-green"><strong>Required</strong></p>';
 	} else {
-		return '<small class="label bg-red">Not required</small>';
+		return '<p class="text-red"><strong>Not required</strong></p>';
 	}
 }
 

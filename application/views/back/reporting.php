@@ -102,7 +102,7 @@ defined( 'BASEPATH' ) or exit( 'God bless you!' );
                                         <div class="form-group has-feedback">
                                             <label>Gender</label>
                                             <select class="form-control attendee-filter select2" id="gender" name="gender">
-                                                <option value="">Select church</option>
+                                                <option value="">Select gender</option>
                                                 <option value="M">Male</option>
                                                 <option value="F">Female</option>
                                             </select>
