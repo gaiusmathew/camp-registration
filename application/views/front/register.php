@@ -29,7 +29,7 @@
 					</div>
 						<div class="box-body">
 							<div class="row">
-								<div class="col-xs-6">
+								<div class="col-xs-12 col-sm-12 col-md-6 ">
 									<div class="form-group">
 										<label>Church</label>
 										<select class="form-control select2" name="church" id="church" required>
@@ -42,7 +42,7 @@
 										</select>
 									</div>
 								</div>
-								<div class="col-xs-6">
+								<div class="col-xs-12 col-sm-12 col-md-6">
 									<div class="form-group has-feedback">
 										<label>Name</label>
 										<input name="name" id="name" class="form-control" placeholder="Full name" value="<?= set_value( 'name' ); ?>" required>
@@ -51,21 +51,21 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-xs-6">
+								<div class="col-xs-12 col-sm-12 col-md-6">
 									<div class="form-group">
 										<label>Age</label>
 										<input type="number" name="age" id="age" min="1" max="120" class="form-control" placeholder="Age" value="<?= set_value( 'age' ); ?>" required>
 										<span class="glyphicons glyphicons-uk-rat-18 form-control-feedback"></span>
 									</div>
 								</div>
-								<div class="col-xs-3">
+								<div class="col-xs-12 col-sm-12 col-md-3">
 									<div class="form-group has-feedback">
 										<label>Gender</label><br/>
 										<input type="radio" name="gender" value="M" class="flat-red" <?php echo set_radio( 'gender', 'M', true ); ?>> Male
 										<input type="radio" name="gender" value="F" class="flat-red"  <?php echo set_radio( 'gender', 'F' ); ?>> Female
 									</div>
 								</div>
-								<div class="col-xs-3">
+								<div class="col-xs-12 col-sm-12 col-md-3">
 									<div class="form-group has-feedback">
 										<label>Accommodation</label><br>
 										<input type="checkbox" id="accommodation" name="accommodation" value="1" class="flat-red" checked> Yes, required.
